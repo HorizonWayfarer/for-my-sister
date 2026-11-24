@@ -5,31 +5,28 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>给姐姐 · 21 岁</title>
 <meta name="description" content="写给姐姐的一封生日信。" />
-<meta name="theme-color" content="#121026" />
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23121026'/%3E%3Ctext x='32' y='44' font-size='30' text-anchor='middle' fill='%23C9A15B' font-family='Georgia,serif'%3E21%3C/text%3E%3C/svg%3E" />
+<meta name="theme-color" content="#FBF6EE" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23FBF6EE'/%3E%3Ctext x='32' y='44' font-size='30' text-anchor='middle' fill='%23B76E79' font-family='Georgia,serif'%3E21%3C/text%3E%3C/svg%3E" />
 <style>
 :root {
-  --night-950: oklch(0.105 0.03 266);
-  --night-900: oklch(0.145 0.038 268);
-  --night-800: oklch(0.20 0.045 266);
-  --night-700: oklch(0.28 0.055 264);
-  --gold: oklch(0.79 0.12 82);
-  --gold-deep: oklch(0.55 0.11 62);
-  --glow: oklch(0.86 0.13 84);
-  --star: oklch(0.94 0.07 90);
-  --dawn-050: oklch(0.985 0.01 85);
-  --dawn-100: oklch(0.96 0.022 82);
-  --dawn-200: oklch(0.925 0.032 70);
-  --dawn-300: oklch(0.885 0.04 58);
-  --lilac-200: oklch(0.91 0.028 302);
-  --ink: oklch(0.29 0.032 55);
-  --ink-soft: oklch(0.44 0.026 58);
-  --muted: oklch(0.57 0.024 62);
-  --line: oklch(0.76 0.035 66 / 0.42);
-  --paper-shadow: 0 24px 64px oklch(0.45 0.05 58 / 0.14);
-  --serif: "Songti SC", "Noto Serif SC", "Source Han Serif SC", "STSong", "STKaiti", "KaiTi", Georgia, serif;
+  --cream: oklch(0.982 0.014 82);
+  --cream-deep: oklch(0.953 0.026 76);
+  --cream-warm: oklch(0.935 0.035 68);
+  --paper: oklch(0.998 0.005 85);
+  --ink: oklch(0.36 0.028 48);
+  --ink-soft: oklch(0.50 0.024 50);
+  --muted: oklch(0.62 0.022 54);
+  --rose: oklch(0.73 0.068 18);
+  --rose-deep: oklch(0.63 0.078 20);
+  --rose-pale: oklch(0.88 0.038 20);
+  --rose-wash: oklch(0.94 0.022 22);
+  --glow: oklch(0.87 0.13 82);
+  --line: oklch(0.73 0.055 22 / .5);
+  --sketch: 255px 12px 225px 15px / 14px 225px 16px 255px;
+  --serif: "Songti SC", "Noto Serif SC", "Source Han Serif SC", "STSong", Georgia, serif;
+  --hand: "STXingkai", "Xingkai SC", "Kaiti SC", "STKaiti", "KaiTi", "楷体", "Noto Serif SC", var(--serif);
   --sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
-  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
 }
 
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -37,7 +34,7 @@ html, body { margin: 0; padding: 0; height: 100%; }
 
 body {
   font-family: var(--sans);
-  background: var(--night-950);
+  background: var(--cream);
   color: var(--ink);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -52,17 +49,16 @@ body {
   overflow: hidden;
 }
 
-/* 细金框 + 顶端菱形：整场统一的信笺气质 */
+/* 手绘玫瑰金细线外框 */
 #stage::after {
   content: "";
   position: fixed;
-  inset: 12px;
-  border: 1px solid oklch(0.78 0.1 78 / 0.26);
-  border-radius: 3px;
+  inset: 11px;
+  border: 1px solid oklch(0.72 0.07 20 / .4);
+  border-radius: var(--sketch);
   pointer-events: none;
   z-index: 40;
 }
-body.night #stage::after { border-color: oklch(0.86 0.1 82 / 0.22); }
 
 .scene {
   position: absolute;
@@ -77,11 +73,10 @@ body.night #stage::after { border-color: oklch(0.86 0.1 82 / 0.22); }
   -webkit-overflow-scrolling: touch;
   opacity: 0;
   visibility: hidden;
-  transform: translateY(18px) scale(0.985);
-  filter: blur(5px);
-  transition: opacity .75s ease, transform .9s cubic-bezier(.2, .75, .2, 1), filter .75s ease, visibility .75s;
+  transform: translateY(16px) scale(.99);
+  transition: opacity .7s ease, transform .85s cubic-bezier(.2, .75, .2, 1), visibility .7s;
 }
-.scene.is-active { opacity: 1; visibility: visible; transform: none; filter: blur(0); }
+.scene.is-active { opacity: 1; visibility: visible; transform: none; }
 
 .scene::before {
   content: "";
@@ -89,8 +84,8 @@ body.night #stage::after { border-color: oklch(0.86 0.1 82 / 0.22); }
   inset: 0;
   background-image: var(--grain);
   background-size: 180px 180px;
-  opacity: .045;
-  mix-blend-mode: soft-light;
+  opacity: .05;
+  mix-blend-mode: multiply;
   pointer-events: none;
   z-index: 0;
 }
@@ -103,123 +98,107 @@ body.night #stage::after { border-color: oklch(0.86 0.1 82 / 0.22); }
 }
 .letterWrap { display: flex; flex-direction: column; align-items: center; max-width: 560px; }
 
-/* 破晓：彩蛋场景 */
 .scene--cream {
   background:
-    radial-gradient(90% 60% at 50% -8%, var(--dawn-050) 0%, transparent 66%),
-    radial-gradient(70% 50% at 12% 100%, oklch(0.90 0.045 52 / .4), transparent 70%),
-    linear-gradient(165deg, var(--dawn-100) 0%, var(--dawn-200) 58%, var(--dawn-300) 100%);
+    radial-gradient(85% 60% at 50% -8%, var(--paper) 0%, transparent 65%),
+    radial-gradient(70% 50% at 88% 100%, oklch(0.94 0.03 24 / .3), transparent 72%),
+    linear-gradient(165deg, var(--cream) 0%, var(--cream-deep) 62%, var(--cream-warm) 100%);
 }
 
-/* 封面：深夜 + 月晕 */
 #scene-cover {
-  color: oklch(0.96 0.012 84);
   background:
-    radial-gradient(105% 72% at 50% 14%, oklch(0.36 0.085 264 / .6) 0%, transparent 62%),
-    radial-gradient(85% 60% at 50% 98%, oklch(0.30 0.07 252 / .5) 0%, transparent 70%),
-    linear-gradient(180deg, var(--night-950) 0%, var(--night-900) 58%, var(--night-800) 100%);
+    radial-gradient(95% 65% at 50% 12%, var(--paper) 0%, transparent 62%),
+    radial-gradient(70% 50% at 12% 96%, var(--rose-wash) 0%, transparent 70%),
+    linear-gradient(180deg, var(--cream) 0%, var(--cream-deep) 100%);
 }
 #scene-cover .cover__inner::before {
-  content: "";
+  content: "~";
   position: absolute;
-  left: 50%; top: 8%;
-  width: 300px; height: 300px;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  background: radial-gradient(circle, oklch(0.9 0.07 84 / .15), transparent 68%);
+  left: 50%; top: 5%;
+  transform: translateX(-50%);
+  font-family: var(--hand);
+  font-size: 42px;
+  color: var(--rose-pale);
+  opacity: .7;
   pointer-events: none;
-  z-index: -1;
 }
 
-/* 蜡烛：烛光夜色 */
+/* 蜡烛场景也改浅色：暖光晕替代夜色 */
 .scene--night {
-  color: oklch(0.96 0.014 82);
   background:
-    radial-gradient(72% 52% at 50% 78%, oklch(0.58 0.13 62 / .24) 0%, transparent 70%),
-    radial-gradient(120% 88% at 50% -2%, oklch(0.25 0.055 268) 0%, transparent 64%),
-    linear-gradient(180deg, oklch(0.10 0.03 264) 0%, oklch(0.15 0.035 260) 55%, oklch(0.19 0.04 252) 100%);
+    radial-gradient(58% 45% at 50% 70%, oklch(0.95 0.075 82 / .35) 0%, transparent 70%),
+    radial-gradient(95% 70% at 50% -6%, var(--paper) 0%, transparent 64%),
+    linear-gradient(170deg, var(--cream) 0%, var(--cream-deep) 58%, var(--cream-warm) 100%);
 }
 
-/* 三个彩蛋各自的色温 */
 #scene-scratch {
   background:
-    radial-gradient(85% 58% at 50% -6%, oklch(0.98 0.025 88) 0%, transparent 64%),
-    radial-gradient(60% 45% at 88% 96%, oklch(0.90 0.045 48 / .38), transparent 72%),
-    linear-gradient(165deg, var(--dawn-100), var(--dawn-200) 60%, var(--dawn-300));
+    radial-gradient(85% 58% at 50% -6%, var(--paper) 0%, transparent 64%),
+    radial-gradient(60% 45% at 90% 96%, oklch(0.94 0.035 30 / .35), transparent 72%),
+    linear-gradient(165deg, var(--cream), var(--cream-deep) 60%, var(--cream-warm));
 }
 #scene-draw {
   background:
-    radial-gradient(85% 58% at 50% -6%, oklch(0.975 0.018 88) 0%, transparent 64%),
-    radial-gradient(65% 48% at 12% 96%, var(--lilac-200) 0%, transparent 72%),
-    linear-gradient(165deg, var(--dawn-100), var(--dawn-200) 62%, var(--dawn-300));
+    radial-gradient(85% 58% at 50% -6%, var(--paper) 0%, transparent 64%),
+    radial-gradient(65% 48% at 10% 96%, oklch(0.94 0.028 350 / .34), transparent 72%),
+    linear-gradient(165deg, var(--cream), var(--cream-deep) 62%, var(--cream-warm));
 }
 #scene-find {
   background:
-    radial-gradient(85% 58% at 50% -6%, var(--dawn-050) 0%, transparent 64%),
-    radial-gradient(60% 46% at 92% 92%, oklch(0.88 0.05 72 / .35), transparent 72%),
-    linear-gradient(165deg, var(--dawn-100), var(--dawn-200) 60%, var(--dawn-300));
+    radial-gradient(85% 58% at 50% -6%, var(--paper) 0%, transparent 64%),
+    radial-gradient(60% 46% at 92% 92%, oklch(0.94 0.035 40 / .32), transparent 72%),
+    linear-gradient(165deg, var(--cream), var(--cream-deep) 60%, var(--cream-warm));
 }
-
-/* 信：晨光落在纸上 */
 #scene-letter {
   background:
-    radial-gradient(85% 60% at 50% -4%, oklch(0.995 0.018 92) 0%, transparent 68%),
-    radial-gradient(60% 45% at 50% 110%, oklch(0.90 0.04 62 / .35), transparent 72%),
-    linear-gradient(180deg, oklch(0.965 0.022 84), oklch(0.91 0.035 70));
+    radial-gradient(85% 60% at 50% -4%, var(--paper) 0%, transparent 68%),
+    radial-gradient(60% 45% at 50% 110%, oklch(0.94 0.03 28 / .3), transparent 72%),
+    linear-gradient(180deg, var(--cream), var(--cream-deep));
 }
 
-/* 按钮 */
+/* 按钮：玫瑰金细线手绘感 */
 .btn {
   appearance: none;
-  border: 1px solid transparent;
   cursor: pointer;
   font: inherit;
   font-size: 14px;
   letter-spacing: .16em;
   text-indent: .16em;
-  min-height: 44px;
-  padding: 12px 28px;
-  border-radius: 999px;
-  background: linear-gradient(135deg, oklch(0.85 0.11 84), oklch(0.68 0.13 66));
-  color: oklch(0.21 0.045 58);
-  box-shadow: 0 8px 24px oklch(0.65 0.12 72 / .26), inset 0 1px 0 oklch(1 0 0 / .38);
-  transition: transform .22s ease, box-shadow .22s ease, opacity .22s ease, filter .22s ease;
+  min-height: 46px;
+  padding: 11px 30px;
+  border-radius: var(--sketch);
+  border: 1px solid var(--rose);
+  background: var(--paper);
+  color: var(--rose-deep);
+  box-shadow: 0 4px 0 -1px oklch(0.88 0.05 20 / .7), 0 12px 26px oklch(0.55 0.06 30 / .1);
+  transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease, background .2s ease;
 }
-.btn:hover { transform: translateY(-2px); box-shadow: 0 14px 32px oklch(0.62 0.13 70 / .32), inset 0 1px 0 oklch(1 0 0 / .45); filter: brightness(1.04); }
-.btn:active { transform: translateY(0) scale(.975); }
-.btn:disabled { opacity: .34; cursor: default; transform: none; box-shadow: none; filter: grayscale(.4); }
+.btn:hover { transform: translateY(-2px); background: var(--rose-wash); box-shadow: 0 6px 0 -1px oklch(0.85 0.06 20 / .7), 0 16px 30px oklch(0.55 0.06 30 / .14); }
+.btn:active { transform: translateY(1px); box-shadow: 0 2px 0 -1px oklch(0.88 0.05 20 / .7); }
+.btn:disabled { opacity: .35; cursor: default; transform: none; box-shadow: none; }
 
 .btn--ghost {
   background: transparent;
-  color: inherit;
+  color: var(--muted);
+  border-color: oklch(0.78 0.04 22 / .5);
   box-shadow: none;
-  border-color: currentColor;
-  opacity: .62;
   font-size: 12.5px;
-  min-height: 40px;
+  min-height: 42px;
   padding: 9px 20px;
-  filter: none;
 }
-.btn--ghost:hover { opacity: .9; filter: none; box-shadow: none; background: oklch(1 0 0 / .06); }
+.btn--ghost:hover { background: oklch(1 0 0 / .45); box-shadow: none; color: var(--rose-deep); }
 
 .btn--day {
-  background: transparent;
-  color: oklch(0.96 0.014 82);
-  border-color: oklch(0.88 0.1 80 / .45);
-  box-shadow: none;
+  background: var(--rose);
+  color: var(--paper);
+  border-color: var(--rose-deep);
+  box-shadow: 0 4px 0 -1px var(--rose-deep), 0 12px 26px oklch(0.6 0.07 20 / .2);
 }
-.btn--day:hover { background: oklch(0.95 0.02 80 / .1); }
-.scene:not(.scene--night) .btn--day {
-  background: oklch(0.995 0.005 85 / .82);
-  color: var(--ink);
-  border-color: oklch(0.78 0.06 70 / .55);
-  box-shadow: 0 6px 18px oklch(0.5 0.05 58 / .08);
-}
-.scene:not(.scene--night) .btn--day:hover { background: oklch(1 0 0); }
+.btn--day:hover { background: var(--rose-deep); box-shadow: 0 6px 0 -1px var(--rose-deep), 0 16px 30px oklch(0.6 0.07 20 / .26); }
 
 .btn:focus-visible, .num:focus-visible, .card3d:focus-visible, .envelope:focus-visible, #soundToggle:focus-visible {
-  outline: 2px solid var(--gold);
-  outline-offset: 3px;
+  outline: 2px dashed var(--rose);
+  outline-offset: 4px;
 }
 
 .eyebrow {
@@ -227,7 +206,7 @@ body.night #stage::after { border-color: oklch(0.86 0.1 82 / 0.22); }
   letter-spacing: .38em;
   text-indent: .38em;
   color: var(--muted);
-  margin: 0 0 18px;
+  margin: 0 0 16px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -235,11 +214,10 @@ body.night #stage::after { border-color: oklch(0.86 0.1 82 / 0.22); }
 }
 .eyebrow::before, .eyebrow::after {
   content: "";
-  width: 22px; height: 1px;
-  background: linear-gradient(90deg, transparent, var(--gold-deep));
+  width: 24px; height: 1px;
+  background: var(--rose-pale);
   flex: none;
 }
-.eyebrow::after { transform: scaleX(-1); }
 
 .hint {
   font-size: 12.5px;
@@ -249,38 +227,34 @@ body.night #stage::after { border-color: oklch(0.86 0.1 82 / 0.22); }
   margin: 22px 0 0;
   text-align: center;
 }
-#scene-cover .hint, .scene--night .hint { color: oklch(0.9 0.02 82 / .62); }
 
 .actions {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 14px;
   flex-wrap: wrap;
-  margin-top: 28px;
+  margin-top: 26px;
 }
 
-/* 声音开关：深玻璃底，明暗场景都清晰 */
+/* 声音开关 */
 #soundToggle {
   position: fixed;
   top: max(24px, env(safe-area-inset-top));
   right: 24px;
   z-index: 60;
-  width: 40px; height: 40px;
+  width: 42px; height: 42px;
   display: grid; place-items: center;
-  border-radius: 50%;
-  border: 1px solid oklch(0.82 0.1 80 / .38);
-  background: oklch(0.17 0.03 264 / .6);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  color: oklch(0.96 0.012 84);
+  border-radius: var(--sketch);
+  border: 1px solid var(--rose);
+  background: var(--paper);
+  color: var(--rose-deep);
   cursor: pointer;
-  box-shadow: 0 5px 18px oklch(0 0 0 / .14);
-  transition: opacity .3s ease, border-color .3s ease, background .3s ease, color .3s ease;
+  box-shadow: 0 3px 0 -1px var(--rose-pale), 0 8px 18px oklch(0.55 0.06 30 / .1);
+  transition: transform .2s ease, background .2s ease;
 }
-body.night #soundToggle { background: oklch(0.96 0.012 84 / .1); }
-#soundToggle:hover { border-color: var(--gold); }
-#soundToggle svg { width: 16px; height: 16px; }
+#soundToggle:hover { transform: rotate(-6deg); background: var(--rose-wash); }
+#soundToggle svg { width: 17px; height: 17px; }
 #soundToggle .off { display: none; }
 #soundToggle.is-muted .on { display: none; }
 #soundToggle.is-muted .off { display: block; }
@@ -289,34 +263,36 @@ body.night #soundToggle { background: oklch(0.96 0.012 84 / .1); }
 .cover__inner { width: 100%; max-width: 520px; text-align: center; }
 
 .cover__title {
-  font-family: var(--serif);
-  font-size: clamp(48px, 13vw, 80px);
-  line-height: 1.08;
-  letter-spacing: .16em;
-  text-indent: .16em;
-  margin: 0 0 12px;
+  font-family: var(--hand);
+  font-size: clamp(50px, 13vw, 82px);
+  line-height: 1.1;
+  letter-spacing: .14em;
+  text-indent: .14em;
+  margin: 0 0 32px;
   font-weight: 400;
-  color: oklch(0.975 0.01 86);
-  text-shadow: 0 2px 34px oklch(0.88 0.1 82 / .28);
+  color: var(--ink);
+  transform: rotate(-1.2deg);
+}
+.cover__title::after {
+  content: "";
+  display: block;
+  width: 76px; height: 8px;
+  margin: 10px auto 0;
+  border-bottom: 2px solid var(--rose);
+  border-radius: 50%;
+  transform: rotate(1deg);
 }
 
 .cover__sub {
-  font-size: 12.5px;
-  letter-spacing: .24em;
-  color: oklch(0.88 0.02 82 / .66);
-  margin: 0 0 38px;
-}
-.cover__sub::before {
-  content: "";
-  display: block;
-  width: 62px; height: 1px;
-  margin: 0 auto 18px;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  font-family: var(--hand);
+  font-size: 14px;
+  letter-spacing: .2em;
+  color: var(--rose-deep);
+  margin: 4px 0 34px;
+  transform: rotate(.6deg);
 }
 
-#scene-cover .eyebrow { color: oklch(0.86 0.06 82 / .75); }
-#scene-cover .eyebrow::before, #scene-cover .eyebrow::after { background: linear-gradient(90deg, transparent, var(--gold)); }
-
+/* 手绘信封 */
 .envelope {
   position: relative;
   width: min(330px, 78vw);
@@ -324,25 +300,25 @@ body.night #soundToggle { background: oklch(0.96 0.012 84 / .1); }
   margin: 0 auto 34px;
   cursor: pointer;
   perspective: 900px;
-  filter: drop-shadow(0 26px 42px oklch(0 0 0 / .38));
+  transform: rotate(-1.5deg);
+  filter: drop-shadow(0 16px 24px oklch(0.55 0.06 30 / .16));
   transition: transform .5s cubic-bezier(.2, .7, .3, 1);
   animation: floatEnv 6s ease-in-out infinite;
 }
-.envelope:hover { transform: translateY(-5px); }
+.envelope:hover { transform: rotate(-1.5deg) translateY(-5px); }
 .envelope.opening { animation: none; }
-
 @keyframes floatEnv {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-7px); }
+  0%, 100% { transform: rotate(-1.5deg) translateY(0); }
+  50% { transform: rotate(-1.5deg) translateY(-6px); }
 }
 
 .envelope__body {
   position: absolute;
   inset: 0;
-  border-radius: 8px;
-  background: linear-gradient(155deg, var(--night-700), var(--night-800) 60%, var(--night-900));
-  border: 1px solid oklch(0.8 0.1 80 / .42);
-  box-shadow: inset 0 0 0 6px oklch(0.12 0.02 264 / .35);
+  border-radius: var(--sketch);
+  background: linear-gradient(155deg, var(--paper), var(--cream-deep));
+  border: 1.5px solid var(--rose);
+  box-shadow: inset 0 0 0 5px oklch(1 0 0 / .55);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -355,8 +331,8 @@ body.night #soundToggle { background: oklch(0.96 0.012 84 / .1); }
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(to top right, transparent calc(50% - .8px), oklch(0.86 0.1 82 / .24) 50%, transparent calc(50% + .8px)),
-    linear-gradient(to top left, transparent calc(50% - .8px), oklch(0.86 0.1 82 / .24) 50%, transparent calc(50% + .8px));
+    linear-gradient(to top right, transparent calc(50% - .8px), var(--rose-pale) 50%, transparent calc(50% + .8px)),
+    linear-gradient(to top left, transparent calc(50% - .8px), var(--rose-pale) 50%, transparent calc(50% + .8px));
   pointer-events: none;
 }
 
@@ -365,9 +341,10 @@ body.night #soundToggle { background: oklch(0.96 0.012 84 / .1); }
   top: 0; left: 0; right: 0;
   height: 58%;
   transform-origin: top center;
-  background: linear-gradient(180deg, var(--night-700), var(--night-800));
-  border: 1px solid oklch(0.8 0.1 80 / .42);
+  background: linear-gradient(180deg, var(--paper), var(--cream-deep));
+  border: 1.5px solid var(--rose);
   border-bottom: 0;
+  border-radius: var(--sketch);
   clip-path: polygon(0 0, 100% 0, 50% 100%);
   transition: transform .75s cubic-bezier(.4, 0, .2, 1);
   z-index: 2;
@@ -377,122 +354,126 @@ body.night #soundToggle { background: oklch(0.96 0.012 84 / .1); }
 .envelope__to {
   position: relative;
   z-index: 3;
-  font-family: var(--serif);
-  font-size: clamp(26px, 7vw, 34px);
-  letter-spacing: .18em;
-  color: oklch(0.97 0.012 86);
+  font-family: var(--hand);
+  font-size: clamp(27px, 7vw, 35px);
+  letter-spacing: .16em;
+  color: var(--ink);
 }
 .envelope__note {
   position: relative;
   z-index: 3;
   margin-top: 8px;
   font-size: 11.5px;
-  letter-spacing: .18em;
-  color: oklch(0.86 0.04 82 / .7);
+  letter-spacing: .16em;
+  color: var(--muted);
 }
 
 .seal {
   position: absolute;
   left: 50%; top: 52%;
   z-index: 4;
-  transform: translate(-50%, -50%);
-  width: 56px; height: 56px;
-  border-radius: 50%;
+  transform: translate(-50%, -50%) rotate(-8deg);
+  width: 58px; height: 58px;
+  border-radius: 46% 54% 52% 48% / 51% 46% 54% 49%;
   display: grid; place-items: center;
-  background: radial-gradient(circle at 34% 28%, oklch(0.92 0.11 86), oklch(0.72 0.13 72) 55%, oklch(0.55 0.12 60));
-  color: oklch(0.2 0.045 58);
-  font-family: var(--serif);
-  font-size: 19px;
-  box-shadow: inset 0 0 0 3px oklch(0.98 0.04 86 / .28), 0 0 26px oklch(0.82 0.14 78 / .5), 0 9px 22px oklch(0 0 0 / .3);
+  background: radial-gradient(circle at 34% 28%, var(--rose-pale), var(--rose) 62%, var(--rose-deep));
+  color: var(--paper);
+  font-family: var(--hand);
+  font-size: 20px;
+  box-shadow: inset 0 0 0 2px oklch(1 0 0 / .4), 0 5px 14px oklch(0.6 0.07 20 / .3);
   transition: opacity .4s ease, transform .5s ease;
   animation: sealPulse 3.4s ease-in-out infinite;
 }
 @keyframes sealPulse {
-  0%, 100% { box-shadow: inset 0 0 0 3px oklch(0.98 0.04 86 / .28), 0 0 20px oklch(0.82 0.14 78 / .42), 0 9px 22px oklch(0 0 0 / .3); }
-  50% { box-shadow: inset 0 0 0 3px oklch(0.98 0.04 86 / .4), 0 0 34px oklch(0.86 0.15 80 / .66), 0 9px 22px oklch(0 0 0 / .3); }
+  0%, 100% { box-shadow: inset 0 0 0 2px oklch(1 0 0 / .4), 0 5px 14px oklch(0.6 0.07 20 / .28); }
+  50% { box-shadow: inset 0 0 0 2px oklch(1 0 0 / .55), 0 6px 22px oklch(0.6 0.08 20 / .42); }
 }
 .envelope.opening .seal { opacity: 0; transform: translate(-50%, -50%) scale(.6); animation: none; }
 
-/* 蜡烛 */
+/* 蜡烛 + 手绘蛋糕 */
 .cakeWrap { width: 100%; max-width: 520px; text-align: center; }
 
 .scene__title {
-  font-family: var(--serif);
+  font-family: var(--hand);
   font-weight: 400;
-  font-size: clamp(25px, 6.4vw, 33px);
-  letter-spacing: .14em;
-  margin: 0 0 10px;
+  font-size: clamp(27px, 6.6vw, 35px);
+  letter-spacing: .12em;
+  margin: 0 0 8px;
   color: var(--ink);
+  transform: rotate(-.8deg);
 }
-.scene__title--light { color: oklch(0.97 0.012 84); }
+.scene__title--light { color: var(--ink); }
 
 .scene__sub {
-  font-size: 12.5px;
-  letter-spacing: .16em;
-  color: oklch(0.9 0.02 82 / .6);
-  margin: 0 0 30px;
+  font-size: 13px;
+  letter-spacing: .14em;
+  color: var(--muted);
+  margin: 0 0 26px;
   min-height: 1.4em;
 }
 
 .stars { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
 .star {
   position: absolute;
-  width: 2px; height: 2px;
+  width: 3px; height: 3px;
   border-radius: 50%;
-  background: var(--star);
+  background: var(--rose-pale);
   animation: twinkle var(--d, 4s) ease-in-out infinite;
   animation-delay: var(--delay, 0s);
 }
 @keyframes twinkle {
-  0%, 100% { opacity: .16; transform: scale(.75); }
-  50% { opacity: .92; transform: scale(1.3); }
+  0%, 100% { opacity: .18; transform: scale(.7); }
+  50% { opacity: .9; transform: scale(1.25); }
 }
 
-.cake { position: relative; width: min(380px, 88vw); margin: 0 auto; }
+.cake { position: relative; width: min(370px, 88vw); margin: 0 auto; filter: url(#sketch); }
 
 .candles {
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  gap: clamp(2px, .9vw, 6px);
-  height: clamp(52px, 13vw, 74px);
-  padding: 0 10px;
+  gap: clamp(2px, .85vw, 5px);
+  width: 62%;
+  height: clamp(52px, 13vw, 72px);
+  margin: 0 auto;
+  padding: 0 2px;
   position: relative;
-  z-index: 3;
+  z-index: 5;
 }
 
 .candle {
   position: relative;
-  width: clamp(4px, 1.05vw, 6px);
+  width: clamp(4px, 1vw, 6px);
+  flex: 1 1 0;
+  max-width: 6px;
   border-radius: 2px 2px 0 0;
-  background: repeating-linear-gradient(45deg, oklch(0.92 0.03 82) 0 3px, oklch(0.84 0.04 70) 3px 6px);
-  box-shadow: inset -1px 0 0 oklch(0 0 0 / .1);
+  background: repeating-linear-gradient(45deg, var(--rose-pale) 0 3px, var(--rose-wash) 3px 6px);
+  border: .5px solid var(--rose-pale);
 }
-.candle:nth-child(3n) { background: repeating-linear-gradient(45deg, oklch(0.92 0.035 30) 0 3px, oklch(0.84 0.045 28) 3px 6px); }
-.candle:nth-child(4n) { background: repeating-linear-gradient(45deg, oklch(0.91 0.03 305) 0 3px, oklch(0.84 0.04 302) 3px 6px); }
+.candle:nth-child(3n) { background: repeating-linear-gradient(45deg, oklch(0.9 0.05 70) 0 3px, oklch(0.85 0.07 66) 3px 6px); }
+.candle:nth-child(4n) { background: repeating-linear-gradient(45deg, oklch(0.92 0.04 350) 0 3px, oklch(0.87 0.055 348) 3px 6px); }
 
 .wick {
   position: absolute;
   top: -4px; left: 50%;
   width: 1px; height: 5px;
-  background: oklch(0.42 0.04 58);
+  background: var(--ink-soft);
   transform: translateX(-50%);
 }
 
 .flame {
   position: absolute;
-  top: -21px; left: 50%;
-  width: 10px; height: 16px;
+  top: -22px; left: 50%;
+  width: 11px; height: 17px;
   transform: translateX(-50%) scale(.2);
   transform-origin: 50% 100%;
   opacity: 0;
   border-radius: 50% 50% 46% 46% / 62% 62% 38% 38%;
-  background: radial-gradient(circle at 50% 72%, oklch(0.99 0.04 96) 0%, oklch(0.88 0.15 84) 36%, oklch(0.74 0.17 58) 72%, transparent 100%);
-  box-shadow: 0 0 14px oklch(0.86 0.16 80 / .9), 0 0 40px oklch(0.78 0.16 64 / .5);
+  background: radial-gradient(circle at 50% 72%, oklch(1 0.03 100) 0%, var(--glow) 38%, oklch(0.78 0.15 58) 74%, transparent 100%);
+  box-shadow: 0 0 16px oklch(0.88 0.15 82 / .85), 0 0 42px oklch(0.82 0.14 70 / .55);
   transition: opacity .35s ease, transform .45s cubic-bezier(.2, .8, .3, 1.4);
 }
 .candle.lit .flame { opacity: 1; transform: translateX(-50%) scale(1); animation: flicker 2.6s ease-in-out infinite; }
-
 @keyframes flicker {
   0%, 100% { transform: translateX(-50%) scale(1, 1) rotate(-1deg); }
   35% { transform: translateX(-52%) scale(.93, 1.07) rotate(2deg); }
@@ -501,10 +482,10 @@ body.night #soundToggle { background: oklch(0.96 0.012 84 / .1); }
 
 .smoke {
   position: absolute;
-  top: -23px; left: 50%;
+  top: -24px; left: 50%;
   width: 6px; height: 6px;
   border-radius: 50%;
-  background: oklch(0.9 0.01 80 / .5);
+  background: oklch(0.6 0.02 40 / .45);
   transform: translateX(-50%);
   opacity: 0;
   pointer-events: none;
@@ -513,69 +494,125 @@ body.night #soundToggle { background: oklch(0.96 0.012 84 / .1); }
 .candle.out .smoke { animation: puff 1.4s ease-out forwards; }
 @keyframes puff {
   0% { opacity: .7; transform: translate(-50%, 0) scale(1); }
-  100% { opacity: 0; transform: translate(-50%, -48px) scale(3.4); }
+  100% { opacity: 0; transform: translate(-50%, -46px) scale(3.4); }
+}
+
+/* 三层手绘蛋糕 */
+.cake__tier {
+  position: relative;
+  margin: 0 auto;
+  border: 1.5px solid var(--rose);
+  box-shadow: inset 0 -8px 18px oklch(0.75 0.06 20 / .12), 0 8px 18px oklch(0.55 0.06 30 / .1);
+}
+.cake__tier--top {
+  width: 58%; height: 42px;
+  margin-bottom: -10px;
+  border-radius: var(--sketch);
+  background: linear-gradient(180deg, var(--paper), var(--cream-deep));
+  z-index: 4;
+}
+.cake__tier--top::before {
+  content: "";
+  position: absolute;
+  left: -2px; right: -2px; top: -9px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 1.5px solid var(--rose);
+}
+.cake__tier--mid {
+  width: 78%; height: 46px;
+  margin-bottom: -10px;
+  border-radius: var(--sketch);
+  background: linear-gradient(180deg, oklch(0.98 0.02 84), var(--cream-deep));
+  z-index: 3;
+}
+.cake__tier--mid::before {
+  content: "";
+  position: absolute;
+  left: -2px; right: -2px; top: -9px;
+  height: 18px;
+  border-radius: 50%;
+  background: oklch(0.99 0.012 85);
+  border: 1.5px solid var(--rose);
 }
 
 .cake__top {
-  height: 27px;
-  margin: 0 4px -12px;
-  border-radius: 50%;
-  background: radial-gradient(ellipse at 50% 38%, oklch(0.99 0.012 90), oklch(0.94 0.035 78) 62%, oklch(0.87 0.05 66));
-  position: relative;
-  z-index: 2;
-  box-shadow: inset 0 -3px 0 oklch(0.78 0.09 76 / .45), 0 9px 20px oklch(0 0 0 / .28);
+  display: none;
 }
 
 .cake__body {
   position: relative;
-  height: clamp(96px, 24vw, 128px);
-  border-radius: 10px 10px 16px 16px;
+  width: 100%;
+  height: clamp(94px, 23vw, 120px);
+  border-radius: var(--sketch);
+  border: 1.5px solid var(--rose);
   background:
-    linear-gradient(90deg, oklch(0 0 0 / .12), transparent 22%, oklch(1 0 0 / .16) 44%, transparent 70%, oklch(0 0 0 / .1)),
-    linear-gradient(180deg, oklch(0.92 0.045 72) 0%, oklch(0.84 0.065 60) 46%, oklch(0.76 0.075 52) 100%);
-  box-shadow: 0 28px 54px oklch(0 0 0 / .38), inset 0 -14px 26px oklch(0.5 0.09 48 / .22);
+    linear-gradient(90deg, oklch(0 0 0 / .03), transparent 20%, oklch(1 0 0 / .5) 45%, transparent 72%, oklch(0 0 0 / .03)),
+    linear-gradient(180deg, var(--paper), var(--cream-deep) 70%, var(--cream-warm));
+  box-shadow: inset 0 -12px 22px oklch(0.75 0.06 20 / .12), 0 20px 34px oklch(0.55 0.06 30 / .16);
   display: grid;
   place-items: center;
-  overflow: hidden;
+  z-index: 2;
 }
 .cake__body::before {
   content: "";
   position: absolute;
-  inset: 0 0 auto;
-  height: 23px;
-  background: radial-gradient(circle at 10% 0, oklch(0.99 0.015 90) 12px, transparent 13px) 0 0 / 40px 23px repeat-x;
-  opacity: .95;
+  left: -2px; right: -2px; top: -10px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 1.5px solid var(--rose);
 }
 .cake__body::after {
   content: "";
   position: absolute;
-  left: 0; right: 0; bottom: 17px;
+  left: 8%; right: 8%; bottom: 13px;
   height: 1px;
-  background: linear-gradient(90deg, transparent, oklch(0.86 0.11 78 / .65), transparent);
+  border-top: 1.5px dashed var(--rose-pale);
 }
 
 .cake__num {
-  font-family: var(--serif);
-  font-size: clamp(36px, 9vw, 48px);
-  letter-spacing: .12em;
-  color: oklch(0.99 0.02 88 / .9);
-  text-shadow: 0 2px 14px oklch(0.5 0.1 48 / .4);
+  font-family: var(--hand);
+  font-size: clamp(40px, 9.5vw, 54px);
+  letter-spacing: .1em;
+  color: var(--rose-deep);
+  transform: rotate(-2deg);
+}
+.cake__cherry {
+  position: absolute;
+  right: 12%; top: -16px;
+  width: 13px; height: 13px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, oklch(0.86 0.12 20), var(--rose-deep));
+  border: 1px solid var(--rose-deep);
+  z-index: 6;
+}
+.cake__cherry::after {
+  content: "";
+  position: absolute;
+  left: 5px; top: -10px;
+  width: 1px; height: 11px;
+  background: var(--rose-deep);
+  transform: rotate(16deg);
 }
 
 .cake__plate {
-  height: 15px;
-  margin: -4px -14px 0;
+  height: 16px;
+  margin: 2px -16px 0;
   border-radius: 50%;
-  background: linear-gradient(180deg, oklch(0.95 0.03 82 / .32), oklch(0.95 0.03 82 / .04));
-  box-shadow: 0 12px 30px oklch(0 0 0 / .2);
+  border: 1.5px solid var(--rose-pale);
+  background: linear-gradient(180deg, oklch(1 0 0 / .8), oklch(0.94 0.03 24 / .35));
+  box-shadow: 0 10px 24px oklch(0.55 0.06 30 / .1);
 }
 
 .counter {
   display: inline-block;
   margin-top: 16px;
-  font-size: 12px;
-  letter-spacing: .3em;
-  color: oklch(0.84 0.09 80 / .72);
+  font-family: var(--hand);
+  font-size: 14px;
+  letter-spacing: .28em;
+  color: var(--rose-deep);
   font-variant-numeric: tabular-nums;
 }
 
@@ -599,24 +636,26 @@ body.night #soundToggle { background: oklch(0.96 0.012 84 / .1); }
 .eggWrap { width: 100%; max-width: 560px; text-align: center; }
 
 .eggStep {
-  font-size: 11px;
-  letter-spacing: .34em;
-  color: var(--gold-deep);
-  margin: 0 0 14px;
+  font-family: var(--hand);
+  font-size: 13px;
+  letter-spacing: .3em;
+  color: var(--rose-deep);
+  margin: 0 0 12px;
 }
 .eggTitle {
-  font-family: var(--serif);
-  font-size: clamp(23px, 5.8vw, 30px);
+  font-family: var(--hand);
+  font-size: clamp(25px, 6vw, 32px);
   font-weight: 400;
   letter-spacing: .12em;
-  margin: 0 0 9px;
+  margin: 0 0 8px;
   color: var(--ink);
+  transform: rotate(-.6deg);
 }
 .eggLead {
   font-size: 13px;
   line-height: 1.9;
   color: var(--ink-soft);
-  margin: 0 0 28px;
+  margin: 0 0 26px;
 }
 
 /* 刮刮卡 */
@@ -625,10 +664,10 @@ body.night #soundToggle { background: oklch(0.96 0.012 84 / .1); }
   width: min(360px, 84vw);
   aspect-ratio: 1.5 / 1;
   margin: 0 auto;
-  border-radius: 18px;
-  background: linear-gradient(150deg, oklch(0.99 0.008 85), oklch(0.94 0.03 74));
-  border: 1px solid oklch(0.78 0.08 72 / .55);
-  box-shadow: var(--paper-shadow), inset 0 0 0 5px oklch(1 0 0 / .5);
+  border-radius: var(--sketch);
+  background: linear-gradient(150deg, var(--paper), var(--cream-deep));
+  border: 1.5px solid var(--rose);
+  box-shadow: 0 14px 34px oklch(0.55 0.06 30 / .12), inset 0 0 0 5px oklch(1 0 0 / .5);
   overflow: hidden;
   touch-action: none;
   cursor: crosshair;
@@ -645,12 +684,12 @@ body.night #soundToggle { background: oklch(0.96 0.012 84 / .1); }
   text-align: center;
 }
 .scratch__under .big {
-  font-family: var(--serif);
-  font-size: clamp(24px, 6vw, 31px);
+  font-family: var(--hand);
+  font-size: clamp(25px, 6.2vw, 33px);
   letter-spacing: .08em;
   color: var(--ink);
 }
-.scratch__under .small { font-size: 12.5px; color: var(--gold-deep); letter-spacing: .12em; }
+.scratch__under .small { font-size: 12.5px; color: var(--rose-deep); letter-spacing: .14em; }
 
 #scratchCanvas {
   position: absolute;
@@ -667,7 +706,7 @@ body.night #soundToggle { background: oklch(0.96 0.012 84 / .1); }
 .card3d.flipped { transform: rotateY(180deg); }
 .cardFace {
   position: absolute; inset: 0;
-  border-radius: 18px;
+  border-radius: var(--sketch);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   display: flex;
@@ -675,46 +714,43 @@ body.night #soundToggle { background: oklch(0.96 0.012 84 / .1); }
   align-items: center;
   justify-content: center;
   padding: 26px;
-  border: 1px solid oklch(0.74 0.09 76 / .6);
-  box-shadow: var(--paper-shadow);
+  border: 1.5px solid var(--rose);
+  box-shadow: 0 16px 38px oklch(0.55 0.06 30 / .14), inset 0 0 0 5px oklch(1 0 0 / .45);
 }
 .cardFace--front {
-  background:
-    radial-gradient(120% 70% at 50% 0%, oklch(0.36 0.06 266), transparent 70%),
-    linear-gradient(160deg, var(--night-800), var(--night-950));
+  background: linear-gradient(160deg, var(--paper), var(--cream-deep));
   gap: 14px;
-  box-shadow: var(--paper-shadow), inset 0 0 0 6px oklch(0.14 0.02 264 / .45);
 }
 .cardFace--front .mark {
-  font-family: var(--serif);
-  font-size: 44px;
-  color: var(--gold);
+  font-family: var(--hand);
+  font-size: 48px;
+  color: var(--rose-deep);
   letter-spacing: .1em;
-  text-shadow: 0 0 26px oklch(0.82 0.14 78 / .45);
+  transform: rotate(-4deg);
 }
-.cardFace--front .tip { font-size: 12px; letter-spacing: .26em; color: oklch(0.9 0.03 82 / .7); }
+.cardFace--front .tip { font-family: var(--hand); font-size: 13px; letter-spacing: .22em; color: var(--muted); }
 .cardFace--back {
   transform: rotateY(180deg);
-  background: linear-gradient(165deg, oklch(0.995 0.006 85), oklch(0.94 0.03 74));
+  background: linear-gradient(165deg, var(--paper), var(--cream-deep));
   gap: 17px;
   text-align: center;
-  box-shadow: var(--paper-shadow), inset 0 0 0 5px oklch(1 0 0 / .55);
 }
 .cardFace--back .yi,
 .cardFace--back .ji { font-size: 12.5px; letter-spacing: .2em; color: var(--muted); }
 .cardFace--back .yi b,
 .cardFace--back .ji b {
   display: block;
-  font-family: var(--serif);
+  font-family: var(--hand);
   font-weight: 400;
-  font-size: clamp(20px, 5vw, 24px);
+  font-size: clamp(22px, 5.4vw, 27px);
   letter-spacing: .12em;
   color: var(--ink);
   margin-top: 9px;
 }
 .cardFace--back .divider {
-  width: 40px; height: 1px;
-  background: linear-gradient(90deg, transparent, var(--gold-deep), transparent);
+  width: 46px; height: 8px;
+  border-bottom: 1.5px solid var(--rose);
+  border-radius: 50%;
 }
 
 /* 找 21 */
@@ -724,41 +760,41 @@ body.night #soundToggle { background: oklch(0.96 0.012 84 / .1); }
   aspect-ratio: 1 / 1;
   margin: 0 auto;
   border-radius: 24px;
-  background: radial-gradient(circle at 50% 45%, oklch(1 0 0 / .42), transparent 72%);
+  background: radial-gradient(circle at 50% 45%, oklch(1 0 0 / .55), transparent 72%);
 }
 .num {
   position: absolute;
-  width: 42px; height: 42px;
-  margin: -21px 0 0 -21px;
+  width: 44px; height: 44px;
+  margin: -22px 0 0 -22px;
   display: grid; place-items: center;
-  border-radius: 50%;
-  border: 1px solid oklch(0.76 0.08 76 / .55);
-  background: oklch(0.995 0.006 85 / .85);
-  color: var(--gold-deep);
-  font-family: var(--serif);
-  font-size: 17px;
+  border-radius: var(--sketch);
+  border: 1.5px solid var(--rose-pale);
+  background: var(--paper);
+  color: var(--rose-deep);
+  font-family: var(--hand);
+  font-size: 18px;
   cursor: pointer;
-  box-shadow: 0 5px 14px oklch(0.5 0.05 58 / .1);
+  box-shadow: 0 4px 12px oklch(0.55 0.06 30 / .1);
   animation: drift var(--dur, 6s) ease-in-out infinite alternate;
   animation-delay: var(--delay, 0s);
-  transition: transform .3s ease, background .3s ease, color .3s ease, box-shadow .3s ease, opacity .5s ease;
+  transition: transform .3s ease, background .3s ease, color .3s ease, box-shadow .3s ease;
 }
 @keyframes drift {
-  from { transform: translate(-4px, -6px); }
-  to { transform: translate(5px, 7px); }
+  from { transform: translate(-4px, -6px) rotate(-2deg); }
+  to { transform: translate(5px, 7px) rotate(2deg); }
 }
-.num:hover { background: oklch(1 0 0); box-shadow: 0 0 0 4px oklch(0.86 0.11 78 / .16), 0 8px 20px oklch(0.5 0.05 58 / .14); }
+.num:hover { background: oklch(1 0 0); box-shadow: 0 0 0 4px oklch(0.8 0.06 20 / .14), 0 8px 20px oklch(0.55 0.06 30 / .16); }
 .num.wrong { animation: shake .45s ease; }
 @keyframes shake {
   0%, 100% { transform: translate(-4px, -6px); }
-  25% { transform: translate(-10px, -6px); }
-  75% { transform: translate(2px, -6px); }
+  25% { transform: translate(-10px, -6px) rotate(-8deg); }
+  75% { transform: translate(2px, -6px) rotate(8deg); }
 }
 .num.found {
-  background: radial-gradient(circle at 40% 30%, oklch(0.9 0.1 82), oklch(0.62 0.13 62));
-  color: oklch(0.99 0.01 86);
-  border-color: transparent;
-  box-shadow: 0 0 0 9px oklch(0.8 0.12 78 / .14), 0 0 38px oklch(0.78 0.13 74 / .5);
+  background: var(--rose);
+  color: var(--paper);
+  border-color: var(--rose-deep);
+  box-shadow: 0 0 0 7px oklch(0.8 0.06 20 / .14), 0 8px 22px oklch(0.6 0.08 20 / .3);
   animation: none;
 }
 
@@ -766,34 +802,34 @@ body.night #soundToggle { background: oklch(0.96 0.012 84 / .1); }
 .letterPaper {
   width: 100%;
   max-width: 560px;
-  background:
-    radial-gradient(900px 400px at 50% 0%, oklch(1 0 0), transparent 72%),
-    linear-gradient(180deg, oklch(0.995 0.008 85), oklch(0.955 0.028 76));
-  border: 1px solid oklch(0.78 0.07 72 / .55);
-  border-radius: 8px;
+  background: radial-gradient(900px 400px at 50% 0%, var(--paper), transparent 72%), linear-gradient(180deg, var(--paper), var(--cream-deep));
+  border: 1.5px solid var(--rose);
+  border-radius: var(--sketch);
   padding: clamp(30px, 7vw, 54px) clamp(24px, 6vw, 48px) clamp(26px, 5vw, 42px);
-  box-shadow: 0 30px 76px oklch(0.48 0.05 58 / .16), inset 0 0 0 6px oklch(1 0 0 / .5);
+  box-shadow: 0 24px 56px oklch(0.55 0.06 30 / .14), inset 0 0 0 6px oklch(1 0 0 / .5);
   position: relative;
 }
 .letterPaper::before {
   content: "";
   position: absolute;
   left: 32px; right: 32px; top: 24px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--gold-deep), transparent);
+  height: 8px;
+  border-bottom: 1.5px solid var(--rose-pale);
+  border-radius: 50%;
 }
 .letterPaper::after {
   content: "21";
   position: absolute;
-  right: 26px; top: 14px;
-  width: 34px; height: 34px;
+  right: 24px; top: 12px;
+  width: 36px; height: 36px;
   display: grid; place-items: center;
-  border-radius: 50%;
-  font-family: var(--serif);
+  border-radius: 46% 54% 52% 48% / 51% 46% 54% 49%;
+  font-family: var(--hand);
   font-size: 13px;
-  color: oklch(0.24 0.04 60);
-  background: radial-gradient(circle at 35% 28%, oklch(0.92 0.11 86), oklch(0.7 0.13 70));
-  box-shadow: 0 3px 10px oklch(0.55 0.1 62 / .25);
+  color: var(--paper);
+  background: radial-gradient(circle at 35% 28%, var(--rose-pale), var(--rose-deep));
+  box-shadow: 0 3px 10px oklch(0.6 0.07 20 / .25);
+  transform: rotate(7deg);
 }
 
 .letterText {
@@ -809,7 +845,7 @@ body.night #soundToggle { background: oklch(0.96 0.012 84 / .1); }
 .caret {
   display: inline-block;
   width: 1px; height: 1.05em;
-  background: var(--gold-deep);
+  background: var(--rose-deep);
   vertical-align: -0.16em;
   animation: blink 1s steps(1) infinite;
   margin-left: 2px;
@@ -819,12 +855,13 @@ body.night #soundToggle { background: oklch(0.96 0.012 84 / .1); }
 .letterSign {
   margin-top: 26px;
   text-align: right;
-  font-family: var(--serif);
-  font-size: 15px;
-  letter-spacing: .16em;
-  color: var(--gold-deep);
+  font-family: var(--hand);
+  font-size: 17px;
+  letter-spacing: .14em;
+  color: var(--rose-deep);
   opacity: 0;
   transition: opacity 1s ease .2s;
+  transform: rotate(-1deg);
 }
 .letterSign.show { opacity: 1; }
 
@@ -839,7 +876,8 @@ body.night #soundToggle { background: oklch(0.96 0.012 84 / .1); }
 
 .ps {
   margin-top: 24px;
-  font-size: 12px;
+  font-family: var(--hand);
+  font-size: 13px;
   letter-spacing: .16em;
   color: var(--muted);
   text-align: center;
@@ -854,12 +892,12 @@ body.night #soundToggle { background: oklch(0.96 0.012 84 / .1); }
   clip: rect(0 0 0 0); white-space: nowrap; border: 0;
 }
 
-/* 入场：内容分层浮起 */
+/* 入场：分层浮起 */
 .scene.is-active .cover__inner > :not(.envelope),
 .scene.is-active .eggWrap > *,
 .scene.is-active .cakeWrap > *,
 .scene.is-active .letterWrap > * {
-  animation: riseIn .72s cubic-bezier(.2, .75, .2, 1) backwards;
+  animation: riseIn .7s cubic-bezier(.2, .75, .2, 1) backwards;
 }
 .scene.is-active .cover__inner > :nth-child(1),
 .scene.is-active .eggWrap > :nth-child(1),
@@ -882,12 +920,12 @@ body.night #soundToggle { background: oklch(0.96 0.012 84 / .1); }
 .scene.is-active .eggWrap > :nth-child(6),
 .scene.is-active .cakeWrap > :nth-child(6) { animation-delay: .46s; }
 @keyframes riseIn {
-  from { opacity: 0; transform: translateY(18px); }
+  from { opacity: 0; transform: translateY(16px); }
   to { opacity: 1; transform: none; }
 }
 
 @media (max-width: 420px) {
-  .num { width: 38px; height: 38px; margin: -19px 0 0 -19px; font-size: 16px; }
+  .num { width: 40px; height: 40px; margin: -20px 0 0 -20px; font-size: 17px; }
   .envelope { width: min(300px, 82vw); }
   #stage::after { inset: 9px; }
   #soundToggle { top: max(18px, env(safe-area-inset-top)); right: 18px; }
@@ -899,7 +937,7 @@ body.night #soundToggle { background: oklch(0.96 0.012 84 / .1); }
     animation-iteration-count: 1 !important;
     transition-duration: .001ms !important;
   }
-  .scene { transform: none; filter: none; }
+  .scene { transform: none; }
 }
   </style>
 </head>
@@ -910,6 +948,13 @@ body.night #soundToggle { background: oklch(0.96 0.012 84 / .1); }
   <svg class="off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9v6h3.5L12 19V5L7.5 9H4z"/><path d="M16 9l5 6"/><path d="M21 9l-5 6"/></svg>
 </button>
 
+<svg width="0" height="0" aria-hidden="true" style="position:absolute;pointer-events:none">
+  <filter id="sketch" x="-10%" y="-10%" width="120%" height="120%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.022" numOctaves="2" seed="4" result="noise"/>
+    <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+
 <div id="stage">
 
   <!-- 1. 封面 -->
@@ -917,7 +962,6 @@ body.night #soundToggle { background: oklch(0.96 0.012 84 / .1); }
     <div class="cover__inner">
       <p class="eyebrow" id="coverDate">2026 · 12 · 14</p>
       <h1 class="cover__title">给 姐姐</h1>
-      <p class="cover__sub">一封信 · 三个小彩蛋 · 一句要说的话</p>
 
       <div class="envelope" id="envelope" role="button" tabindex="0" aria-label="拆开信封">
         <div class="envelope__body">
@@ -943,8 +987,9 @@ body.night #soundToggle { background: oklch(0.96 0.012 84 / .1); }
 
       <div class="cake">
         <div class="candles" id="candles"></div>
-        <div class="cake__top"></div>
-        <div class="cake__body"><span class="cake__num">21</span></div>
+        <div class="cake__tier cake__tier--top"></div>
+        <div class="cake__tier cake__tier--mid"></div>
+        <div class="cake__body"><span class="cake__num">21</span><span class="cake__cherry"></span></div>
         <div class="cake__plate"></div>
       </div>
 
@@ -1097,20 +1142,120 @@ body.night #soundToggle { background: oklch(0.96 0.012 84 / .1); }
       o.frequency.value = freq;
       var t = c.currentTime;
       g.gain.setValueAtTime(0.0001, t);
-      g.gain.exponentialRampToValueAtTime(gain || 0.05, t + 0.012);
+      g.gain.exponentialRampToValueAtTime(gain || 0.12, t + 0.012);
       g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
       o.connect(g); g.connect(c.destination);
       o.start(t); o.stop(t + dur + 0.03);
     } catch (e) {}
   }
-  function chime() { tone(880, 0.5, 0.04); tone(1320, 0.4, 0.018); }
+  function chime() { tone(880, 0.5, 0.1); tone(1320, 0.4, 0.05); }
+
+  /* ---------- 背景音乐：WebAudio 程序化八音盒循环（零音频文件） ---------- */
+  var bgmBus = null, bgmTimer = null, bgmNext = 0, bgmStep = 0;
+  var MELODY = [76, 79, 81, 79, 72, 76, 81, 79, 77, 76, 72, 74, 76, 79, 72, null];
+  var BASS = [48, 45, 41, 43];
+  var CHORDS = [[60, 64, 67], [57, 60, 64], [53, 57, 60], [55, 59, 62]];
+  var STEP = 0.62;
+
+  function bgmOutput() {
+    var c = ctx();
+    if (!c || bgmBus) return bgmBus;
+    bgmBus = c.createGain();
+    bgmBus.gain.value = 0;
+    var comp = c.createDynamicsCompressor();
+    bgmBus.connect(comp);
+    comp.connect(c.destination);
+    return bgmBus;
+  }
+
+  function pnote(midi, at, dur, vol, kind) {
+    try {
+      var c = ctx();
+      if (!c) return;
+      var bus = bgmOutput();
+      if (!bus) return;
+      var f = 440 * Math.pow(2, (midi - 69) / 12);
+      var o = c.createOscillator(), g = c.createGain();
+      o.type = "sine";
+      o.frequency.value = f;
+      g.gain.setValueAtTime(0.0001, at);
+      g.gain.exponentialRampToValueAtTime(vol, at + (kind === "bass" ? 0.06 : 0.015));
+      g.gain.exponentialRampToValueAtTime(0.0001, at + dur);
+      o.connect(g); g.connect(bus);
+      o.start(at); o.stop(at + dur + 0.05);
+      if (kind === "box") {
+        var o2 = c.createOscillator(), g2 = c.createGain();
+        o2.type = "sine";
+        o2.frequency.value = f * 2;
+        g2.gain.setValueAtTime(0.0001, at);
+        g2.gain.exponentialRampToValueAtTime(vol * 0.3, at + 0.012);
+        g2.gain.exponentialRampToValueAtTime(0.0001, at + dur * 0.5);
+        o2.connect(g2); g2.connect(bus);
+        o2.start(at); o2.stop(at + dur + 0.05);
+      }
+    } catch (e) {}
+  }
+
+  function pumpBgm() {
+    try {
+      var c = ctx();
+      if (!c || !S.sound || !bgmBus) return;
+      var now = c.currentTime;
+      if (bgmNext < now) bgmNext = now + 0.12;
+      while (bgmNext < now + 2.5) {
+        var s = bgmStep % 16;
+        var n = MELODY[s];
+        if (n !== null) pnote(n, bgmNext, 0.9, 0.05, "box");
+        if (s % 4 === 0) {
+          var bar = Math.floor(bgmStep / 4) % 4;
+          pnote(BASS[bar], bgmNext, 2.1, 0.032, "bass");
+          for (var k = 0; k < CHORDS[bar].length; k++) {
+            pnote(CHORDS[bar][k], bgmNext, 1.9, 0.009, "pad");
+          }
+        }
+        bgmNext += STEP;
+        bgmStep++;
+      }
+    } catch (e) {}
+  }
+
+  function startBgm() {
+    if (bgmTimer || !S.sound) return;
+    var c = ctx();
+    if (!c) return;
+    try {
+      var bus = bgmOutput();
+      var now = c.currentTime;
+      bus.gain.cancelScheduledValues(now);
+      bus.gain.setValueAtTime(bus.gain.value, now);
+      bus.gain.linearRampToValueAtTime(0.85, now + 2.4);
+      bgmNext = now + 0.15;
+      pumpBgm();
+      bgmTimer = setInterval(pumpBgm, 700);
+    } catch (e) {}
+  }
+
+  function stopBgm() {
+    if (bgmTimer) { clearInterval(bgmTimer); bgmTimer = null; }
+    if (!bgmBus || !audioCtx) return;
+    try {
+      var now = audioCtx.currentTime;
+      bgmBus.gain.cancelScheduledValues(now);
+      bgmBus.gain.setValueAtTime(bgmBus.gain.value, now);
+      bgmBus.gain.linearRampToValueAtTime(0, now + 0.5);
+    } catch (e) {}
+  }
 
   var soundToggle = $("soundToggle");
   soundToggle.addEventListener("click", function () {
     S.sound = !S.sound;
     soundToggle.classList.toggle("is-muted", !S.sound);
     soundToggle.setAttribute("aria-pressed", String(S.sound));
-    if (S.sound) tone(660, 0.16, 0.05);
+    if (S.sound) { tone(660, 0.16, 0.12); startBgm(); } else stopBgm();
+  });
+  document.addEventListener("click", function firstGesture() {
+    if (S.sound) startBgm();
+    document.removeEventListener("click", firstGesture);
   });
 
   /* ---------- 场景切换 ---------- */
@@ -1123,7 +1268,7 @@ body.night #soundToggle { background: oklch(0.96 0.012 84 / .1); }
     S.scene = name;
     document.body.classList.toggle("night", name === "cake");
     document.querySelector('meta[name="theme-color"]')
-      .setAttribute("content", name === "cake" ? "#0D0C18" : "#F5EDE2");
+      .setAttribute("content", "#FBF6EE");
     next.scrollTop = 0;
     void next.offsetWidth;
     next.classList.add("is-active");
@@ -1151,8 +1296,9 @@ body.night #soundToggle { background: oklch(0.96 0.012 84 / .1); }
     if (S.opened) return;
     S.opened = true;
     $("envelope").classList.add("opening");
-    tone(523, 0.25, 0.05);
-    tone(784, 0.35, 0.03);
+    startBgm();
+    tone(523, 0.25, 0.12);
+    tone(784, 0.35, 0.08);
     setTimeout(function () { go("cake"); }, 720);
   }
   $("openBtn").addEventListener("click", openEnvelope);
@@ -1226,7 +1372,7 @@ body.night #soundToggle { background: oklch(0.96 0.012 84 / .1); }
       nodes[i].classList.add("lit");
       S.lit++;
       counter.textContent = S.lit + " / " + TOTAL;
-      tone(420 + i * 26, 0.14, 0.035, "triangle");
+      tone(420 + i * 26, 0.14, 0.09, "triangle");
       i++;
       setTimeout(next, 95);
     })();
@@ -1241,7 +1387,7 @@ body.night #soundToggle { background: oklch(0.96 0.012 84 / .1); }
       (function (idx) {
         setTimeout(function () {
           nodes[idx].classList.add("out");
-          tone(220 - idx * 3, 0.1, 0.02, "sine");
+          tone(220 - idx * 3, 0.1, 0.07, "sine");
         }, idx * 40);
       })(i);
     }
@@ -1252,7 +1398,7 @@ body.night #soundToggle { background: oklch(0.96 0.012 84 / .1); }
       counter.textContent = "♡";
       cakeActions.innerHTML = '<button class="btn btn--day" id="toEgg1" type="button">继续</button>' +
         '<button class="btn btn--ghost" id="skipCake2" type="button">跳过</button>';
-      cakeHint.textContent = "接下来说点正经的，还有三个小彩蛋";
+      cakeHint.textContent = "接下来说点正经的";
       announce("蜡烛已吹灭，愿望已收到");
     }, 900);
   }
@@ -1268,7 +1414,7 @@ body.night #soundToggle { background: oklch(0.96 0.012 84 / .1); }
   });
 
   function popConfetti() {
-    var colors = ["#E9C98F", "#F6DFC0", "#D8A79C", "#C9A15B", "#DCCFEA", "#FFF6E6"];
+    var colors = ["#C98A90", "#E3B7B9", "#D8A79C", "#B76E79", "#EAD3D5", "#FFF6E6"];
     var count = window.innerWidth < 500 ? 46 : 72;
     var html = "";
     for (var i = 0; i < count; i++) {
@@ -1312,21 +1458,21 @@ body.night #soundToggle { background: oklch(0.96 0.012 84 / .1); }
 
     var w = rect.width, h = rect.height;
     var g = c.createLinearGradient(0, 0, w, h);
-    g.addColorStop(0, "#C9BBD6");
-    g.addColorStop(.35, "#B9A9C8");
-    g.addColorStop(.6, "#DDD0E0");
-    g.addColorStop(1, "#A99BBB");
+    g.addColorStop(0, "#E8C4C6");
+    g.addColorStop(.35, "#D9AFB2");
+    g.addColorStop(.6, "#F0DADD");
+    g.addColorStop(1, "#C79B9F");
     c.fillStyle = g;
     c.fillRect(0, 0, w, h);
 
     c.globalAlpha = .14;
-    c.fillStyle = "#6E5F80";
+    c.fillStyle = "#9B6B70";
     for (var i = 0; i < 160; i++) {
       c.fillRect(Math.random() * w, Math.random() * h, 1.4, 1.4);
     }
     c.globalAlpha = 1;
 
-    c.fillStyle = "rgba(255,252,248,.9)";
+    c.fillStyle = "rgba(255,253,250,.95)";
     c.font = "500 12px system-ui, sans-serif";
     c.textAlign = "center";
     c.fillText("刮 开 这 一 层", w / 2, h / 2 + 4);
@@ -1448,8 +1594,8 @@ body.night #soundToggle { background: oklch(0.96 0.012 84 / .1); }
       card3d.classList.add("flipped");
       S.cardFlipped = true;
       S.drawn++;
-      tone(620, 0.14, 0.04, "triangle");
-      tone(930, 0.22, 0.022);
+      tone(620, 0.14, 0.1, "triangle");
+      tone(930, 0.22, 0.06);
       $("drawAgain").disabled = false;
       $("drawNext").disabled = false;
       $("drawAgain").textContent = "再抽一张";
@@ -1504,7 +1650,7 @@ body.night #soundToggle { background: oklch(0.96 0.012 84 / .1); }
         btn.classList.add("found");
         $("findNext").disabled = false;
         chime();
-        tone(1046, 0.5, 0.045);
+        tone(1046, 0.5, 0.11);
         $("findHint").textContent = "找到啦。21 岁，正式生效。";
         announce("找到 21 了");
         var all = findStage.querySelectorAll(".num");
@@ -1514,7 +1660,7 @@ body.night #soundToggle { background: oklch(0.96 0.012 84 / .1); }
       } else {
         btn.classList.add("wrong");
         setTimeout(function () { btn.classList.remove("wrong"); }, 460);
-        tone(300, 0.08, 0.03, "square");
+        tone(300, 0.08, 0.08, "square");
         $("findHint").textContent = "这是 " + v + "，再找找。";
       }
     });
