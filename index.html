@@ -1044,6 +1044,8 @@ body {
   </filter>
 </svg>
 
+<audio id="birthdaySong" src="birthday-song.mp3" loop preload="none"></audio>
+
 <div id="stage">
 
   <!-- 1. 封面 -->
@@ -1557,12 +1559,35 @@ body {
     } catch (e) {}
   }
 
+  /* ---------- 蛋糕场景专属音乐 ---------- */
+  var birthdaySong = $("birthdaySong");
+  birthdaySong.volume = 0.55;
+
+  function playCakeSong() {
+    if (!S.sound) return;
+    stopBgm();
+    try {
+      birthdaySong.currentTime = 0;
+      var p = birthdaySong.play();
+      if (p && p.catch) p.catch(function () {});
+    } catch (e) {}
+  }
+  function pauseCakeSong() {
+    try { birthdaySong.pause(); } catch (e) {}
+  }
+  function resumeSceneBgm() {
+    if (S.sound) startBgm();
+  }
+
   var soundToggle = $("soundToggle");
   soundToggle.addEventListener("click", function () {
     S.sound = !S.sound;
     soundToggle.classList.toggle("is-muted", !S.sound);
     soundToggle.setAttribute("aria-pressed", String(S.sound));
-    if (S.sound) { tone(660, 0.16, 0.12); startBgm(); } else stopBgm();
+    if (S.sound) {
+      tone(660, 0.16, 0.12);
+      if (S.scene === "cake") playCakeSong(); else startBgm();
+    } else { stopBgm(); pauseCakeSong(); }
   });
   document.addEventListener("click", function firstGesture() {
     if (S.sound) startBgm();
@@ -1583,7 +1608,14 @@ body {
     next.scrollTop = 0;
     void next.offsetWidth;
     next.classList.add("is-active");
-    if (name === "cake") { initCake(); if (!skipBuild) startCakeBuild(); }
+    if (name === "cake") {
+      initCake();
+      if (!skipBuild) startCakeBuild();
+      playCakeSong();
+    } else if (cur && cur.id === "scene-cake") {
+      pauseCakeSong();
+      resumeSceneBgm();
+    }
     if (name === "scratch") initScratch();
     if (name === "find") initFind();
     if (name === "letter") startLetter();
