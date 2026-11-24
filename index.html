@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>给姐姐 · 21 岁</title>
+<meta name="description" content="写给姐姐的一封生日信。" />
+<meta name="theme-color" content="#FBF6EE" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23FBF6EE'/%3E%3Ctext x='32' y='44' font-size='30' text-anchor='middle' fill='%23C08A6E' font-family='Georgia,serif'%3E21%3C/text%3E%3C/svg%3E" />
+<style>
+  :root {
+    --cream: #FBF6EE;
+    --paper: #FFFDF8;
+    --ink: #3E322C;
+    --muted: #8C7A6E;
+    --rose: #D8A79C;
+    --rose-deep: #C08A6E;
+    --gold: #C6A15B;
+    --line: rgba(62, 50, 44, 0.14);
+    --shadow: 0 20px 60px rgba(90, 66, 52, 0.13);
+    --serif: "Songti SC", "Kaiti SC", "STKaiti", "KaiTi", "Noto Serif SC", "Noto Serif CJK SC", Georgia, serif;
+    --sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
+  }
+
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--cream);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow: hidden;
+  }
+
+  #stage {
+    position: fixed;
+    inset: 0;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+  }
+
+  .scene {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: max(28px, env(safe-area-inset-top)) 22px max(28px, env(safe-area-inset-bottom));
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(14px) scale(0.995);
+    transition: opacity .7s ease, transform .7s cubic-bezier(.2, .7, .3, 1), visibility .7s;
+  }
+  .scene.is-active { opacity: 1; visibility: visible; transform: none; }
+
+  /* 内容纵向居中；内容超高时自动回到顶部并允许滚动 */
+  .cover__inner, .cakeWrap, .eggWrap, .letterWrap { margin: auto 0; width: 100%; }
+  .letterWrap { display: flex; flex-direction: column; align-items: center; max-width: 560px; }
+
+  .scene--cream {
+    background:
+      radial-gradient(1200px 700px at 50% -10%, #FFF9F1 0%, rgba(255, 249, 241, 0) 60%),
+      linear-gradient(180deg, #FBF6EE 0%, #F7EFE4 100%);
+  }
+  .scene--night {
+    background:
+      radial-gradient(900px 600px at 50% 20%, #2A2340 0%, rgba(42, 35, 64, 0) 70%),
+      linear-gradient(180deg, #100E1A 0%, #1B1729 55%, #241C31 100%);
+    color: #F3EBE2;
+  }
+
+  .btn {
+    appearance: none;
+    border: 0;
+    cursor: pointer;
+    font: inherit;
+    font-size: 15px;
+    letter-spacing: .08em;
+    padding: 13px 28px;
+    border-radius: 999px;
+    background: var(--ink);
+    color: #FFF9F2;
+    box-shadow: 0 10px 26px rgba(62, 50, 44, .18);
+    transition: transform .25s ease, box-shadow .25s ease, opacity .25s ease;
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 16px 34px rgba(62, 50, 44, .22); }
+  .btn:active { transform: translateY(0) scale(.98); }
+  .btn:disabled { opacity: .35; cursor: default; transform: none; box-shadow: none; }
+
+  .btn--ghost {
+    background: transparent;
+    color: inherit;
+    box-shadow: none;
+    border: 1px solid currentColor;
+    opacity: .55;
+    font-size: 13px;
+    padding: 9px 20px;
+  }
+  .btn--day { background: var(--paper); color: var(--ink); border: 1px solid var(--line); }
+  .btn:focus-visible, .num:focus-visible, .card3d:focus-visible, .envelope:focus-visible, #soundToggle:focus-visible {
+    outline: 2px solid var(--rose-deep);
+    outline-offset: 3px;
+  }
+
+  .eyebrow {
+    font-size: 12px;
+    letter-spacing: .38em;
+    text-indent: .38em;
+    color: var(--muted);
+    margin: 0 0 18px;
+  }
+
+  .hint {
+    font-size: 12.5px;
+    letter-spacing: .12em;
+    color: var(--muted);
+    min-height: 1.4em;
+    margin: 22px 0 0;
+    text-align: center;
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-top: 28px;
+  }
+
+  /* 声音开关 */
+  #soundToggle {
+    position: fixed;
+    top: max(14px, env(safe-area-inset-top));
+    right: 14px;
+    z-index: 60;
+    width: 38px; height: 38px;
+    display: grid; place-items: center;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    background: rgba(255, 253, 248, .72);
+    backdrop-filter: blur(8px);
+    color: var(--ink);
+    cursor: pointer;
+    transition: opacity .3s ease, border-color .3s ease, color .3s ease;
+  }
+  body.night #soundToggle {
+    border-color: rgba(243, 235, 226, .22);
+    background: rgba(255, 255, 255, .06);
+    color: #F3EBE2;
+  }
+  #soundToggle svg { width: 16px; height: 16px; }
+  #soundToggle .off { display: none; }
+  #soundToggle.is-muted .on { display: none; }
+  #soundToggle.is-muted .off { display: block; }
+
+  /* 封面 */
+  .cover__inner { width: 100%; max-width: 520px; text-align: center; }
+
+  .cover__title {
+    font-family: var(--serif);
+    font-size: clamp(46px, 12vw, 76px);
+    line-height: 1.05;
+    letter-spacing: .12em;
+    text-indent: .12em;
+    margin: 0 0 10px;
+    font-weight: 500;
+  }
+
+  .cover__sub {
+    font-size: 13px;
+    letter-spacing: .22em;
+    color: var(--muted);
+    margin: 0 0 40px;
+  }
+
+  .envelope {
+    position: relative;
+    width: min(330px, 78vw);
+    aspect-ratio: 1.62 / 1;
+    margin: 0 auto 34px;
+    cursor: pointer;
+    perspective: 900px;
+    filter: drop-shadow(0 22px 40px rgba(120, 84, 64, .16));
+    transition: transform .5s cubic-bezier(.2, .7, .3, 1);
+  }
+  .envelope:hover { transform: translateY(-4px); }
+
+  .envelope__body {
+    position: absolute;
+    inset: 0;
+    border-radius: 6px;
+    background: linear-gradient(155deg, #FFFCF6 0%, #F8EEE0 100%);
+    border: 1px solid rgba(192, 138, 110, .28);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding: 22px 24px;
+    overflow: hidden;
+  }
+  .envelope__body::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to top right, transparent calc(50% - .8px), rgba(192, 138, 110, .18) 50%, transparent calc(50% + .8px)),
+      linear-gradient(to top left, transparent calc(50% - .8px), rgba(192, 138, 110, .18) 50%, transparent calc(50% + .8px));
+    pointer-events: none;
+  }
+
+  .envelope__flap {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 58%;
+    transform-origin: top center;
+    background: linear-gradient(180deg, #FDF6EB, #F6E8D8);
+    border: 1px solid rgba(192, 138, 110, .3);
+    border-bottom: 0;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    transition: transform .75s cubic-bezier(.4, 0, .2, 1);
+    z-index: 2;
+  }
+  .envelope.opening .envelope__flap { transform: rotateX(-168deg); }
+
+  .envelope__to {
+    position: relative;
+    z-index: 3;
+    font-family: var(--serif);
+    font-size: clamp(26px, 7vw, 34px);
+    letter-spacing: .18em;
+  }
+  .envelope__note {
+    position: relative;
+    z-index: 3;
+    margin-top: 8px;
+    font-size: 11.5px;
+    letter-spacing: .18em;
+    color: var(--muted);
+  }
+
+  .seal {
+    position: absolute;
+    left: 50%; top: 52%;
+    z-index: 4;
+    transform: translate(-50%, -50%);
+    width: 54px; height: 54px;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    background: radial-gradient(circle at 35% 30%, #D9A08D, #B4705C);
+    color: #FFF4EA;
+    font-family: var(--serif);
+    font-size: 18px;
+    box-shadow: 0 8px 20px rgba(150, 90, 70, .3), inset 0 0 0 1px rgba(255, 255, 255, .28);
+    transition: opacity .4s ease, transform .5s ease;
+  }
+  .envelope.opening .seal { opacity: 0; transform: translate(-50%, -50%) scale(.6); }
+
+  /* 蜡烛 */
+  .cakeWrap { width: 100%; max-width: 520px; text-align: center; }
+
+  .scene__title {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(24px, 6.4vw, 32px);
+    letter-spacing: .14em;
+    margin: 0 0 10px;
+  }
+  .scene__title--light { color: #F6EEE4; }
+
+  .scene__sub {
+    font-size: 13px;
+    letter-spacing: .16em;
+    color: rgba(243, 235, 226, .55);
+    margin: 0 0 30px;
+    min-height: 1.4em;
+  }
+
+  .stars { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+  .star {
+    position: absolute;
+    width: 2px; height: 2px;
+    border-radius: 50%;
+    background: #FFF6E6;
+    animation: twinkle var(--d, 4s) ease-in-out infinite;
+    animation-delay: var(--delay, 0s);
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: .18; transform: scale(.8); }
+    50% { opacity: .9; transform: scale(1.25); }
+  }
+
+  .cake { position: relative; width: min(380px, 88vw); margin: 0 auto; }
+
+  .candles {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: clamp(2px, .9vw, 6px);
+    height: clamp(52px, 13vw, 74px);
+    padding: 0 10px;
+    position: relative;
+    z-index: 3;
+  }
+
+  .candle {
+    position: relative;
+    width: clamp(4px, 1.05vw, 6px);
+    border-radius: 2px;
+    background: repeating-linear-gradient(45deg, #F3E2CF 0 3px, #E6CDB2 3px 6px);
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .08);
+  }
+  .candle:nth-child(3n) { background: repeating-linear-gradient(45deg, #F0DCD8 0 3px, #DCC0BB 3px 6px); }
+  .candle:nth-child(4n) { background: repeating-linear-gradient(45deg, #EDE4F0 0 3px, #D8C9DE 3px 6px); }
+
+  .wick {
+    position: absolute;
+    top: -4px; left: 50%;
+    width: 1px; height: 5px;
+    background: #6B5748;
+    transform: translateX(-50%);
+  }
+
+  .flame {
+    position: absolute;
+    top: -20px; left: 50%;
+    width: 9px; height: 15px;
+    transform: translateX(-50%) scale(.2);
+    transform-origin: 50% 100%;
+    opacity: 0;
+    border-radius: 50% 50% 46% 46% / 62% 62% 38% 38%;
+    background: radial-gradient(circle at 50% 72%, #FFF4C8 0%, #FFC65C 38%, #F98B2E 72%, rgba(249, 139, 46, .1) 100%);
+    box-shadow: 0 0 12px rgba(255, 190, 90, .85), 0 0 34px rgba(255, 160, 60, .45);
+    transition: opacity .35s ease, transform .45s cubic-bezier(.2, .8, .3, 1.4);
+  }
+  .candle.lit .flame { opacity: 1; transform: translateX(-50%) scale(1); animation: flicker 2.6s ease-in-out infinite; }
+
+  @keyframes flicker {
+    0%, 100% { transform: translateX(-50%) scale(1, 1) rotate(-1deg); }
+    35% { transform: translateX(-52%) scale(.94, 1.06) rotate(2deg); }
+    70% { transform: translateX(-48%) scale(1.05, .95) rotate(-2deg); }
+  }
+
+  .smoke {
+    position: absolute;
+    top: -22px; left: 50%;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: rgba(240, 236, 232, .55);
+    transform: translateX(-50%);
+    opacity: 0;
+    pointer-events: none;
+  }
+  .candle.out .flame { opacity: 0; transform: translateX(-50%) scale(.1); animation: none; }
+  .candle.out .smoke { animation: puff 1.4s ease-out forwards; }
+  @keyframes puff {
+    0% { opacity: .7; transform: translate(-50%, 0) scale(1); }
+    100% { opacity: 0; transform: translate(-50%, -46px) scale(3.2); }
+  }
+
+  .cake__top {
+    height: 26px;
+    margin: 0 4px -12px;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at 50% 40%, #FFF8EF 0%, #F7E9DA 62%, #EFDCC8 100%);
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, .25);
+  }
+
+  .cake__body {
+    position: relative;
+    height: clamp(96px, 24vw, 128px);
+    border-radius: 10px 10px 14px 14px;
+    background:
+      radial-gradient(120px 40px at 18% 0%, rgba(255, 255, 255, .35), transparent 70%),
+      linear-gradient(180deg, #F3DCCB 0%, #E7C3AA 46%, #D9A98C 100%);
+    box-shadow: 0 26px 50px rgba(0, 0, 0, .35), inset 0 -12px 22px rgba(150, 96, 62, .18);
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+  }
+  .cake__body::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto;
+    height: 22px;
+    background: radial-gradient(circle at 10% 0, #FFF6EA 12px, transparent 13px) 0 0 / 40px 22px repeat-x;
+    opacity: .95;
+  }
+
+  .cake__num {
+    font-family: var(--serif);
+    font-size: clamp(34px, 9vw, 46px);
+    letter-spacing: .12em;
+    color: rgba(255, 250, 244, .82);
+    text-shadow: 0 2px 10px rgba(150, 96, 62, .25);
+  }
+
+  .cake__plate {
+    height: 14px;
+    margin: -4px -14px 0;
+    border-radius: 50%;
+    background: linear-gradient(180deg, rgba(255, 248, 240, .28), rgba(255, 248, 240, .04));
+  }
+
+  .counter {
+    display: inline-block;
+    margin-top: 16px;
+    font-size: 12px;
+    letter-spacing: .28em;
+    color: rgba(243, 235, 226, .5);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .confetti { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 5; }
+  .confetti i {
+    position: absolute;
+    top: -6vh;
+    width: 7px; height: 11px;
+    border-radius: 1px;
+    opacity: 0;
+    animation: fall var(--t, 3s) linear forwards;
+    animation-delay: var(--delay, 0s);
+  }
+  @keyframes fall {
+    0% { opacity: 0; transform: translateY(0) rotate(0deg); }
+    8% { opacity: .95; }
+    100% { opacity: 0; transform: translateY(112vh) rotate(var(--r, 540deg)); }
+  }
+
+  /* 彩蛋通用 */
+  .eggWrap { width: 100%; max-width: 560px; text-align: center; }
+
+  .eggStep {
+    font-size: 11.5px;
+    letter-spacing: .3em;
+    color: var(--muted);
+    margin: 0 0 14px;
+  }
+  .eggTitle {
+    font-family: var(--serif);
+    font-size: clamp(22px, 5.8vw, 28px);
+    font-weight: 500;
+    letter-spacing: .1em;
+    margin: 0 0 8px;
+  }
+  .eggLead {
+    font-size: 13.5px;
+    line-height: 1.9;
+    color: var(--muted);
+    margin: 0 0 28px;
+  }
+
+  /* 刮刮卡 */
+  .scratch {
+    position: relative;
+    width: min(360px, 84vw);
+    aspect-ratio: 1.5 / 1;
+    margin: 0 auto;
+    border-radius: 14px;
+    background: linear-gradient(150deg, #FFFCF6, #F6ECDD);
+    border: 1px solid rgba(192, 138, 110, .3);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    touch-action: none;
+    cursor: crosshair;
+  }
+  .scratch__under {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px;
+    text-align: center;
+  }
+  .scratch__under .big {
+    font-family: var(--serif);
+    font-size: clamp(24px, 6vw, 30px);
+    letter-spacing: .08em;
+  }
+  .scratch__under .small { font-size: 12.5px; color: var(--muted); letter-spacing: .1em; }
+
+  #scratchCanvas {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    transition: opacity .6s ease;
+  }
+  #scratchCanvas.gone { opacity: 0; pointer-events: none; }
+
+  /* 抽签卡 */
+  .deck { position: relative; width: min(300px, 76vw); aspect-ratio: .72 / 1; margin: 0 auto 6px; perspective: 1000px; }
+  .card3d { position: absolute; inset: 0; transform-style: preserve-3d; transition: transform .8s cubic-bezier(.3, .7, .2, 1); cursor: pointer; border: 0; background: none; padding: 0; }
+  .card3d.flipped { transform: rotateY(180deg); }
+  .cardFace {
+    position: absolute; inset: 0;
+    border-radius: 16px;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 26px;
+    border: 1px solid rgba(192, 138, 110, .32);
+    box-shadow: var(--shadow);
+  }
+  .cardFace--front {
+    background:
+      radial-gradient(420px 200px at 50% 0%, #FFFDF8, transparent 70%),
+      linear-gradient(160deg, #FDF6EC, #F3E4D2);
+    gap: 12px;
+  }
+  .cardFace--front .mark { font-family: var(--serif); font-size: 40px; color: var(--rose-deep); opacity: .8; letter-spacing: .1em; }
+  .cardFace--front .tip { font-size: 12px; letter-spacing: .26em; color: var(--muted); }
+  .cardFace--back {
+    transform: rotateY(180deg);
+    background: linear-gradient(165deg, #FFFDF8, #FBF2E6);
+    gap: 16px;
+    text-align: center;
+  }
+  .cardFace--back .yi,
+  .cardFace--back .ji { font-size: 13px; letter-spacing: .2em; color: var(--muted); }
+  .cardFace--back .yi b,
+  .cardFace--back .ji b {
+    display: block;
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(19px, 5vw, 23px);
+    letter-spacing: .12em;
+    color: var(--ink);
+    margin-top: 8px;
+  }
+  .cardFace--back .divider { width: 34px; height: 1px; background: rgba(192, 138, 110, .45); }
+
+  /* 找 21 */
+  .findStage { position: relative; width: min(430px, 90vw); aspect-ratio: 1 / 1; margin: 0 auto; }
+  .num {
+    position: absolute;
+    width: 42px; height: 42px;
+    margin: -21px 0 0 -21px;
+    display: grid; place-items: center;
+    border-radius: 50%;
+    border: 1px solid rgba(192, 138, 110, .26);
+    background: rgba(255, 253, 248, .72);
+    color: var(--rose-deep);
+    font-family: var(--serif);
+    font-size: 17px;
+    cursor: pointer;
+    animation: drift var(--dur, 6s) ease-in-out infinite alternate;
+    animation-delay: var(--delay, 0s);
+    transition: transform .3s ease, background .3s ease, color .3s ease, box-shadow .3s ease, opacity .5s ease;
+  }
+  @keyframes drift {
+    from { transform: translate(-4px, -6px); }
+    to { transform: translate(5px, 7px); }
+  }
+  .num:hover { background: #FFF7EC; }
+  .num.wrong { animation: shake .45s ease; }
+  @keyframes shake {
+    0%, 100% { transform: translate(-4px, -6px); }
+    25% { transform: translate(-10px, -6px); }
+    75% { transform: translate(2px, -6px); }
+  }
+  .num.found {
+    background: radial-gradient(circle at 40% 30%, #F0C9A8, #C08A6E);
+    color: #FFF9F2;
+    border-color: transparent;
+    box-shadow: 0 0 0 8px rgba(192, 138, 110, .12), 0 0 34px rgba(192, 138, 110, .5);
+    animation: none;
+  }
+
+  /* 信 */
+  .letterPaper {
+    width: 100%;
+    max-width: 560px;
+    background:
+      radial-gradient(900px 400px at 50% 0%, #FFFEFA, transparent 70%),
+      linear-gradient(180deg, #FFFDF8, #FBF3E7);
+    border: 1px solid rgba(192, 138, 110, .26);
+    border-radius: 4px;
+    padding: clamp(28px, 7vw, 54px) clamp(22px, 6vw, 48px) clamp(24px, 5vw, 40px);
+    box-shadow: 0 30px 70px rgba(120, 84, 64, .14);
+    position: relative;
+  }
+  .letterPaper::before {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; top: 22px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(192, 138, 110, .3), transparent);
+  }
+
+  .letterText {
+    font-family: var(--serif);
+    font-size: clamp(15.5px, 4.1vw, 18px);
+    line-height: 2.15;
+    letter-spacing: .04em;
+    color: #443730;
+    white-space: pre-wrap;
+    min-height: 12em;
+    cursor: pointer;
+  }
+  .caret {
+    display: inline-block;
+    width: 1px; height: 1.05em;
+    background: var(--rose-deep);
+    vertical-align: -0.16em;
+    animation: blink 1s steps(1) infinite;
+    margin-left: 2px;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  .letterSign {
+    margin-top: 26px;
+    text-align: right;
+    font-family: var(--serif);
+    font-size: 15px;
+    letter-spacing: .16em;
+    color: var(--muted);
+    opacity: 0;
+    transition: opacity 1s ease .2s;
+  }
+  .letterSign.show { opacity: 1; }
+
+  .letterTools {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    margin-top: 30px;
+    width: 100%;
+    max-width: 560px;
+  }
+
+  .ps {
+    margin-top: 24px;
+    font-size: 12px;
+    letter-spacing: .16em;
+    color: rgba(140, 122, 110, .85);
+    text-align: center;
+    opacity: 0;
+    transition: opacity 1.2s ease .6s;
+  }
+  .ps.show { opacity: 1; }
+
+  .sr-only {
+    position: absolute; width: 1px; height: 1px;
+    padding: 0; margin: -1px; overflow: hidden;
+    clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  }
+
+  @media (max-width: 420px) {
+    .num { width: 38px; height: 38px; margin: -19px 0 0 -19px; font-size: 16px; }
+    .envelope { width: min(300px, 82vw); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: .001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: .001ms !important;
+    }
+    .scene { transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<button id="soundToggle" type="button" aria-label="开启或关闭音效" aria-pressed="true">
+  <svg class="on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9v6h3.5L12 19V5L7.5 9H4z"/><path d="M16 8.5a5 5 0 0 1 0 7"/><path d="M18.5 6a8.5 8.5 0 0 1 0 12"/></svg>
+  <svg class="off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9v6h3.5L12 19V5L7.5 9H4z"/><path d="M16 9l5 6"/><path d="M21 9l-5 6"/></svg>
+</button>
+
+<div id="stage">
+
+  <!-- 1. 封面 -->
+  <section class="scene scene--cream is-active" id="scene-cover">
+    <div class="cover__inner">
+      <p class="eyebrow" id="coverDate">2026 · 12 · 14</p>
+      <h1 class="cover__title">给 姐姐</h1>
+      <p class="cover__sub">一封信 · 三个小彩蛋 · 一句要说的话</p>
+
+      <div class="envelope" id="envelope" role="button" tabindex="0" aria-label="拆开信封">
+        <div class="envelope__body">
+          <span class="envelope__to">给 姐姐</span>
+          <span class="envelope__note">拆之前，请先深呼吸一下</span>
+        </div>
+        <div class="envelope__flap"></div>
+        <div class="seal">21</div>
+      </div>
+
+      <div class="actions">
+        <button class="btn" id="openBtn" type="button">拆开看看</button>
+      </div>
+      <p class="hint" id="coverHint">慢慢来，不着急</p>
+    </div>
+  </section>
+
+  <!-- 2. 蜡烛 -->
+  <section class="scene scene--night" id="scene-cake">
+    <div class="cakeWrap">
+      <h2 class="scene__title scene__title--light">先点个蜡烛吧</h2>
+      <p class="scene__sub" id="cakeSub">21 根，一根都不能少</p>
+
+      <div class="cake">
+        <div class="candles" id="candles"></div>
+        <div class="cake__top"></div>
+        <div class="cake__body"><span class="cake__num">21</span></div>
+        <div class="cake__plate"></div>
+      </div>
+
+      <div><span class="counter" id="counter">0 / 21</span></div>
+
+      <div class="actions" id="cakeActions">
+        <button class="btn btn--day" id="lightBtn" type="button">点亮</button>
+        <button class="btn btn--ghost" id="skipCake" type="button">跳过</button>
+      </div>
+      <p class="hint" id="cakeHint" style="color: rgba(243,235,226,.5);">一共 21 根，一根都不能少</p>
+    </div>
+    <div class="stars" id="stars" aria-hidden="true"></div>
+    <div class="confetti" id="confetti" aria-hidden="true"></div>
+  </section>
+
+  <!-- 3. 彩蛋一 -->
+  <section class="scene scene--cream" id="scene-scratch">
+    <div class="eggWrap">
+      <p class="eggStep">彩蛋 一 / 三</p>
+      <h2 class="eggTitle">刮开它</h2>
+      <p class="eggLead">手指（或鼠标）在卡片上划一划，字会自己浮出来。</p>
+
+      <div class="scratch" id="scratch">
+        <div class="scratch__under">
+          <span class="big" id="scratchWord">今日宜：被惦记</span>
+          <span class="small" id="scratchSub">忌 熬夜</span>
+        </div>
+        <canvas id="scratchCanvas"></canvas>
+      </div>
+
+      <div class="actions">
+        <button class="btn" id="scratchNext" type="button" disabled>下一步</button>
+        <button class="btn btn--ghost" id="scratchSkip" type="button">跳过</button>
+      </div>
+      <p class="hint" id="scratchHint">刮开一半左右就能看全</p>
+    </div>
+  </section>
+
+  <!-- 4. 彩蛋二 -->
+  <section class="scene scene--cream" id="scene-draw">
+    <div class="eggWrap">
+      <p class="eggStep">彩蛋 二 / 三</p>
+      <h2 class="eggTitle">抽一张今日签</h2>
+      <p class="eggLead">十张签，每次只出这张。不满意就再抽，抽到满意为止。</p>
+
+      <div class="deck">
+        <button class="card3d" id="card3d" type="button" aria-label="抽一张签">
+          <span class="cardFace cardFace--front">
+            <span class="mark">廿一</span>
+            <span class="tip" id="cardTip">点我抽签</span>
+          </span>
+          <span class="cardFace cardFace--back">
+            <span class="yi">宜<b id="yiText">被惦记</b></span>
+            <span class="divider"></span>
+            <span class="ji">忌<b id="jiText">熬夜</b></span>
+          </span>
+        </button>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn--day" id="drawAgain" type="button" disabled>再抽一张</button>
+        <button class="btn" id="drawNext" type="button" disabled>下一步</button>
+        <button class="btn btn--ghost" id="drawSkip" type="button">跳过</button>
+      </div>
+      <p class="hint" id="drawHint">共 10 张，有 1 张很偏心</p>
+    </div>
+  </section>
+
+  <!-- 5. 彩蛋三 -->
+  <section class="scene scene--cream" id="scene-find">
+    <div class="eggWrap">
+      <p class="eggStep">彩蛋 三 / 三</p>
+      <h2 class="eggTitle">找出那个 21</h2>
+      <p class="eggLead">1 到 21 都在里面，只有一个是 21。它不太安分。</p>
+
+      <div class="findStage" id="findStage"></div>
+
+      <div class="actions">
+        <button class="btn" id="findNext" type="button" disabled>下一步</button>
+        <button class="btn btn--ghost" id="findSkip" type="button">跳过</button>
+      </div>
+      <p class="hint" id="findHint">点错了也没关系，它们不会生气</p>
+    </div>
+  </section>
+
+  <!-- 6. 信 -->
+  <section class="scene scene--cream" id="scene-letter">
+    <div class="letterWrap">
+      <div class="letterPaper">
+        <p class="eyebrow" style="margin-bottom: 22px;">最后</p>
+        <div class="letterText" id="letterText"></div>
+        <div class="letterSign" id="letterSign">—— 弟弟</div>
+        <div class="ps" id="psLine">2026.12.14 · 二十一岁</div>
+      </div>
+      <div class="letterTools">
+        <button class="btn btn--day" id="replayBtn" type="button">从头再看一遍</button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<p class="sr-only" id="live" aria-live="polite"></p>
+
+<script>
+(function () {
+  "use strict";
+
+  var S = {
+    scene: "cover",
+    sound: true,
+    lit: 0,
+    blowing: false,
+    revealed: false,
+    drawn: 0,
+    found: false,
+    typing: false,
+    letterStarted: false,
+    opened: false,
+    cakeBuilt: false,
+    scratchInited: false,
+    findInited: false,
+    cardFlipped: false,
+    busy: false
+  };
+
+  var live = document.getElementById("live");
+  function announce(msg) { live.textContent = msg; }
+  function $(id) { return document.getElementById(id); }
+
+  /* ---------- 音效（WebAudio，无外部文件） ---------- */
+  var audioCtx = null;
+  function ctx() {
+    if (!audioCtx) {
+      var C = window.AudioContext || window.webkitAudioContext;
+      if (!C) return null;
+      audioCtx = new C();
+    }
+    if (audioCtx.state === "suspended") audioCtx.resume();
+    return audioCtx;
+  }
+  function tone(freq, dur, gain, type) {
+    if (!S.sound) return;
+    var c = ctx();
+    if (!c) return;
+    try {
+      var o = c.createOscillator();
+      var g = c.createGain();
+      o.type = type || "sine";
+      o.frequency.value = freq;
+      var t = c.currentTime;
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(gain || 0.05, t + 0.012);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+      o.connect(g); g.connect(c.destination);
+      o.start(t); o.stop(t + dur + 0.03);
+    } catch (e) {}
+  }
+  function chime() { tone(880, 0.5, 0.04); tone(1320, 0.4, 0.018); }
+
+  var soundToggle = $("soundToggle");
+  soundToggle.addEventListener("click", function () {
+    S.sound = !S.sound;
+    soundToggle.classList.toggle("is-muted", !S.sound);
+    soundToggle.setAttribute("aria-pressed", String(S.sound));
+    if (S.sound) tone(660, 0.16, 0.05);
+  });
+
+  /* ---------- 场景切换 ---------- */
+  function go(name) {
+    if (S.scene === name) return;
+    var cur = $("scene-" + S.scene);
+    var next = $("scene-" + name);
+    if (!next) return;
+    if (cur) cur.classList.remove("is-active");
+    S.scene = name;
+    document.body.classList.toggle("night", name === "cake");
+    document.querySelector('meta[name="theme-color"]')
+      .setAttribute("content", name === "cake" ? "#141220" : "#FBF6EE");
+    next.scrollTop = 0;
+    void next.offsetWidth;
+    next.classList.add("is-active");
+    if (name === "cake") initCake();
+    if (name === "scratch") initScratch();
+    if (name === "find") initFind();
+    if (name === "letter") startLetter();
+  }
+
+  /* ---------- 封面日期 ---------- */
+  (function dateHint() {
+    var target = new Date(2026, 11, 14);
+    var now = new Date();
+    var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    var diff = Math.round((target - today) / 86400000);
+    var el = $("coverHint");
+    if (diff > 1) el.textContent = "离 12 月 14 日还有 " + diff + " 天";
+    else if (diff === 1) el.textContent = "明天就是 12 月 14 日了";
+    else if (diff === 0) el.textContent = "今天，12 月 14 日";
+    else el.textContent = "二十一岁 · 补上的那份";
+  })();
+
+  /* ---------- 封面 ---------- */
+  function openEnvelope() {
+    if (S.opened) return;
+    S.opened = true;
+    $("envelope").classList.add("opening");
+    tone(523, 0.25, 0.05);
+    tone(784, 0.35, 0.03);
+    setTimeout(function () { go("cake"); }, 720);
+  }
+  $("openBtn").addEventListener("click", openEnvelope);
+  $("envelope").addEventListener("click", openEnvelope);
+  $("envelope").addEventListener("keydown", function (e) {
+    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openEnvelope(); }
+  });
+
+  /* ---------- 星空 ---------- */
+  (function stars() {
+    var box = $("stars");
+    var n = window.innerWidth < 500 ? 46 : 80;
+    var html = "";
+    for (var i = 0; i < n; i++) {
+      var size = Math.random() < 0.15 ? 3 : 2;
+      html += '<span class="star" style="left:' + (Math.random() * 100).toFixed(2) + "%;top:" +
+        (Math.random() * 78).toFixed(2) + "%;width:" + size + "px;height:" + size + "px;--d:" +
+        (3 + Math.random() * 4).toFixed(2) + "s;--delay:" + (Math.random() * 4).toFixed(2) + "s;opacity:" +
+        (0.25 + Math.random() * 0.5).toFixed(2) + '"></span>';
+    }
+    box.innerHTML = html;
+  })();
+
+  /* ---------- 蜡烛 ---------- */
+  var TOTAL = 21;
+  var candlesBox = $("candles");
+  var counter = $("counter");
+  var cakeSub = $("cakeSub");
+  var cakeHint = $("cakeHint");
+  var cakeActions = $("cakeActions");
+  var confetti = $("confetti");
+
+  function buildCandles() {
+    if (S.cakeBuilt) return;
+    S.cakeBuilt = true;
+    var html = "";
+    for (var i = 0; i < TOTAL; i++) {
+      var h = 26 + Math.round(Math.random() * 26);
+      html += '<div class="candle" style="height:' + h + 'px"><span class="wick"></span>' +
+        '<span class="flame"></span><span class="smoke"></span></div>';
+    }
+    candlesBox.innerHTML = html;
+    counter.textContent = "0 / " + TOTAL;
+  }
+
+  function initCake() {
+    buildCandles();
+    if (S.lit === 0 && !S.blowing) {
+      var btn = $("lightBtn");
+      if (btn) { btn.disabled = false; btn.textContent = "点亮"; }
+      cakeHint.textContent = "一共 21 根，一根都不能少";
+    }
+  }
+
+  function lightAll() {
+    var btn = $("lightBtn");
+    if (!btn) return;
+    if (S.blowing || btn.dataset.mode === "blow" || S.lit >= TOTAL) return;
+    btn.disabled = true;
+    var nodes = candlesBox.children;
+    var i = S.lit;
+    (function next() {
+      if (i >= TOTAL) {
+        btn.disabled = false;
+        btn.textContent = "许个愿，吹灭它";
+        btn.dataset.mode = "blow";
+        cakeHint.textContent = "闭上眼，想一件今年最想要的事";
+        cakeSub.textContent = "21 岁，愿望要许得贪心一点";
+        return;
+      }
+      nodes[i].classList.add("lit");
+      S.lit++;
+      counter.textContent = S.lit + " / " + TOTAL;
+      tone(420 + i * 26, 0.14, 0.035, "triangle");
+      i++;
+      setTimeout(next, 95);
+    })();
+  }
+
+  function blowAll(btn) {
+    if (S.blowing) return;
+    S.blowing = true;
+    btn.disabled = true;
+    var nodes = candlesBox.children;
+    for (var i = 0; i < nodes.length; i++) {
+      (function (idx) {
+        setTimeout(function () {
+          nodes[idx].classList.add("out");
+          tone(220 - idx * 3, 0.1, 0.02, "sine");
+        }, idx * 40);
+      })(i);
+    }
+    setTimeout(function () {
+      popConfetti();
+      chime();
+      cakeSub.textContent = "愿望收到了。";
+      counter.textContent = "♡";
+      cakeActions.innerHTML = '<button class="btn btn--day" id="toEgg1" type="button">继续</button>' +
+        '<button class="btn btn--ghost" id="skipCake2" type="button">跳过</button>';
+      cakeHint.textContent = "接下来说点正经的，还有三个小彩蛋";
+      announce("蜡烛已吹灭，愿望已收到");
+    }, 900);
+  }
+
+  cakeActions.addEventListener("click", function (e) {
+    var btn = e.target.closest("button");
+    if (!btn) return;
+    // 吹灭优先：点亮完成后同一个按钮会切换成“许个愿，吹灭它”
+    if (btn.dataset.mode === "blow") { blowAll(btn); return; }
+    if (btn.id === "lightBtn") { lightAll(); return; }
+    if (btn.id === "skipCake" || btn.id === "skipCake2") { go("scratch"); return; }
+    if (btn.id === "toEgg1") { go("scratch"); return; }
+  });
+
+  function popConfetti() {
+    var colors = ["#E8C7A0", "#F2D9C4", "#D8A79C", "#C6A15B", "#EDE4F0", "#FFF6E6"];
+    var count = window.innerWidth < 500 ? 46 : 72;
+    var html = "";
+    for (var i = 0; i < count; i++) {
+      var color = colors[Math.floor(Math.random() * colors.length)];
+      html += '<i style="left:' + (Math.random() * 100).toFixed(2) + "%;background:" + color +
+        ";--t:" + (2.4 + Math.random() * 2.2).toFixed(2) + "s;--delay:" + (Math.random() * 1.2).toFixed(2) +
+        "s;--r:" + (Math.random() * 1080 - 540).toFixed(0) + 'deg"></i>';
+    }
+    confetti.innerHTML = html;
+  }
+
+  /* ---------- 彩蛋一：刮刮卡 ---------- */
+  var canvas = $("scratchCanvas");
+  var scratch = $("scratch");
+  var drawing = false;
+  var lastPt = null;
+  var strokes = 0;
+
+  var SCRATCH_LINES = [
+    ["今日宜：被惦记", "忌 熬夜"],
+    ["今日宜：吃顿好的", "忌 说自己胖"],
+    ["今日宜：收下礼物", "忌 说“不用了”"],
+    ["今日宜：睡到自然醒", "忌 跟自己较劲"],
+    ["今日宜：被人夸", "忌 假装不在意"]
+  ];
+
+  function initScratch() {
+    if (S.scratchInited) return;
+    S.scratchInited = true;
+
+    var line = SCRATCH_LINES[Math.floor(Math.random() * SCRATCH_LINES.length)];
+    $("scratchWord").textContent = line[0];
+    $("scratchSub").textContent = line[1];
+
+    var rect = scratch.getBoundingClientRect();
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = Math.round(rect.width * dpr);
+    canvas.height = Math.round(rect.height * dpr);
+    var c = canvas.getContext("2d");
+    c.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    var w = rect.width, h = rect.height;
+    var g = c.createLinearGradient(0, 0, w, h);
+    g.addColorStop(0, "#D9C4AE");
+    g.addColorStop(.35, "#C7AF98");
+    g.addColorStop(.6, "#DCC9B4");
+    g.addColorStop(1, "#BFA58C");
+    c.fillStyle = g;
+    c.fillRect(0, 0, w, h);
+
+    c.globalAlpha = .14;
+    c.fillStyle = "#8A6E58";
+    for (var i = 0; i < 160; i++) {
+      c.fillRect(Math.random() * w, Math.random() * h, 1.4, 1.4);
+    }
+    c.globalAlpha = 1;
+
+    c.fillStyle = "rgba(255,252,245,.85)";
+    c.font = "500 12px system-ui, sans-serif";
+    c.textAlign = "center";
+    c.fillText("刮 开 这 一 层", w / 2, h / 2 + 4);
+
+    canvas.addEventListener("pointerdown", startDraw);
+    canvas.addEventListener("pointermove", moveDraw);
+    window.addEventListener("pointerup", endDraw);
+    window.addEventListener("pointercancel", endDraw);
+  }
+
+  function localPos(e) {
+    var r = canvas.getBoundingClientRect();
+    return { x: e.clientX - r.left, y: e.clientY - r.top };
+  }
+  function startDraw(e) {
+    drawing = true;
+    if (canvas.setPointerCapture) {
+      try { canvas.setPointerCapture(e.pointerId); } catch (err) {}
+    }
+    lastPt = localPos(e);
+    erase(lastPt);
+  }
+  function moveDraw(e) {
+    if (!drawing) return;
+    var p = localPos(e);
+    erase(p);
+    lastPt = p;
+  }
+  function endDraw() {
+    drawing = false;
+    lastPt = null;
+    checkScratch();
+  }
+
+  function erase(p) {
+    var c = canvas.getContext("2d");
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    c.save();
+    c.setTransform(dpr, 0, 0, dpr, 0, 0);
+    c.globalCompositeOperation = "destination-out";
+    c.beginPath();
+    c.arc(p.x, p.y, 26, 0, Math.PI * 2);
+    if (lastPt) {
+      c.moveTo(lastPt.x, lastPt.y);
+      c.lineTo(p.x, p.y);
+      c.lineWidth = 52;
+      c.lineCap = "round";
+      c.strokeStyle = "rgba(0,0,0,1)";
+      c.stroke();
+    }
+    c.fill();
+    c.restore();
+
+    strokes++;
+    if (strokes % 6 === 0) checkScratch();
+  }
+
+  function checkScratch() {
+    if (S.revealed) return;
+    if (strokes > 90) { revealScratch(); return; }
+    var c = canvas.getContext("2d");
+    var data;
+    try { data = c.getImageData(0, 0, canvas.width, canvas.height).data; }
+    catch (err) { return; }
+    var clear = 0, total = 0;
+    for (var i = 3; i < data.length; i += 4 * 9) {
+      total++;
+      if (data[i] < 40) clear++;
+    }
+    if (total && clear / total > 0.4) revealScratch();
+  }
+
+  function revealScratch() {
+    if (S.revealed) return;
+    S.revealed = true;
+    canvas.classList.add("gone");
+    $("scratchNext").disabled = false;
+    chime();
+    $("scratchHint").textContent = "看吧，其实也没什么秘密。";
+    announce("刮开了，是一句祝福");
+  }
+
+  $("scratchNext").addEventListener("click", function () { go("draw"); });
+  $("scratchSkip").addEventListener("click", function () { go("draw"); });
+
+  /* ---------- 彩蛋二：抽签 ---------- */
+  var card3d = $("card3d");
+
+  var FORTUNES = [
+    ["被惦记", "熬夜"],
+    ["吃顿好的", "委屈自己"],
+    ["睡到自然醒", "跟自己较劲"],
+    ["收下礼物", "说“不用了”"],
+    ["被人夸", "假装不在意"],
+    ["出门走两步", "一直回消息"],
+    ["买点没用的", "攒着不舍得花"],
+    ["被偏袒", "当老好人"],
+    ["发会儿呆", "硬撑"],
+    ["大声笑", "憋着"]
+  ];
+
+  function drawCard() {
+    if (S.busy) return;
+    S.busy = true;
+    if (S.cardFlipped) {
+      card3d.classList.remove("flipped");
+      S.cardFlipped = false;
+      setTimeout(paintCard, 420);
+    } else {
+      paintCard();
+    }
+  }
+
+  function paintCard() {
+    var f = FORTUNES[Math.floor(Math.random() * FORTUNES.length)];
+    $("yiText").textContent = f[0];
+    $("jiText").textContent = f[1];
+    setTimeout(function () {
+      card3d.classList.add("flipped");
+      S.cardFlipped = true;
+      S.drawn++;
+      tone(620, 0.14, 0.04, "triangle");
+      tone(930, 0.22, 0.022);
+      $("drawAgain").disabled = false;
+      $("drawNext").disabled = false;
+      $("drawAgain").textContent = "再抽一张";
+      $("cardTip").textContent = "已抽 " + S.drawn + " 次";
+      $("drawHint").textContent = "共 10 张，有 1 张很偏心";
+      S.busy = false;
+      announce("抽到：宜 " + f[0] + "，忌 " + f[1]);
+    }, 220);
+  }
+
+  card3d.addEventListener("click", drawCard);
+  $("drawAgain").addEventListener("click", function () {
+    if (S.busy) return;
+    S.busy = true;
+    card3d.classList.remove("flipped");
+    S.cardFlipped = false;
+    setTimeout(function () { S.busy = false; drawCard(); }, 480);
+  });
+  $("drawNext").addEventListener("click", function () { go("find"); });
+  $("drawSkip").addEventListener("click", function () { go("find"); });
+
+  /* ---------- 彩蛋三：找 21 ---------- */
+  var findStage = $("findStage");
+
+  function initFind() {
+    if (S.findInited) return;
+    S.findInited = true;
+    var nums = [];
+    for (var i = 1; i <= 21; i++) nums.push(i);
+    for (var j = nums.length - 1; j > 0; j--) {
+      var k = Math.floor(Math.random() * (j + 1));
+      var t = nums[j]; nums[j] = nums[k]; nums[k] = t;
+    }
+    var html = "";
+    for (var idx = 0; idx < nums.length; idx++) {
+      var col = idx % 5;
+      var row = Math.floor(idx / 5);
+      var left = 11 + col * 19.5 + (Math.random() * 7 - 3.5);
+      var top = 13 + row * 18 + (Math.random() * 7 - 3.5);
+      html += '<button class="num" type="button" data-v="' + nums[idx] + '" style="left:' +
+        left.toFixed(2) + "%;top:" + top.toFixed(2) + "%;--dur:" + (4.5 + Math.random() * 4).toFixed(2) +
+        "s;--delay:" + (Math.random() * 3).toFixed(2) + 's">' + nums[idx] + "</button>";
+    }
+    findStage.innerHTML = html;
+
+    findStage.addEventListener("click", function (e) {
+      var btn = e.target.closest(".num");
+      if (!btn || S.found) return;
+      var v = parseInt(btn.dataset.v, 10);
+      if (v === 21) {
+        S.found = true;
+        btn.classList.add("found");
+        $("findNext").disabled = false;
+        chime();
+        tone(1046, 0.5, 0.045);
+        $("findHint").textContent = "找到啦。21 岁，正式生效。";
+        announce("找到 21 了");
+        var all = findStage.querySelectorAll(".num");
+        for (var m = 0; m < all.length; m++) {
+          if (parseInt(all[m].dataset.v, 10) !== 21) all[m].style.opacity = ".22";
+        }
+      } else {
+        btn.classList.add("wrong");
+        setTimeout(function () { btn.classList.remove("wrong"); }, 460);
+        tone(300, 0.08, 0.03, "square");
+        $("findHint").textContent = "这是 " + v + "，再找找。";
+      }
+    });
+  }
+
+  $("findNext").addEventListener("click", function () { go("letter"); });
+  $("findSkip").addEventListener("click", function () { go("letter"); });
+
+  /* ---------- 信 ---------- */
+  var LETTER =
+    "姐姐，21 岁生日快乐。\n\n" +
+    "其实我不太会说这种话。我们平时话不多，我也不太清楚你最近在忙什么、喜欢什么。" +
+    "所以这份礼物我没敢替你写太多，只写了一些我确定的事：你是我姐，你比我早来这个世界几年，这件事从来没变过。\n\n" +
+    "21 岁，愿你被世界温柔以待，也愿你有底气对不喜欢的事说“不”。";
+
+  var letterText = $("letterText");
+  var letterSign = $("letterSign");
+  var psLine = $("psLine");
+  var typingTimer = null;
+
+  function startLetter() {
+    if (S.letterStarted) return;
+    S.letterStarted = true;
+    typeLetter();
+  }
+
+  function typeLetter() {
+    clearTimeout(typingTimer);
+    letterText.textContent = "";
+    letterSign.classList.remove("show");
+    psLine.classList.remove("show");
+    var caret = document.createElement("span");
+    caret.className = "caret";
+    var i = 0;
+    S.typing = true;
+
+    function step() {
+      if (!S.typing) return;
+      if (i >= LETTER.length) {
+        S.typing = false;
+        if (caret.parentNode) caret.parentNode.removeChild(caret);
+        letterSign.classList.add("show");
+        psLine.classList.add("show");
+        return;
+      }
+      var ch = LETTER.charAt(i);
+      letterText.textContent = LETTER.slice(0, i + 1);
+      letterText.appendChild(caret);
+      i++;
+      var d = ch === "\n" ? 240 : /[，。、？！]/.test(ch) ? 200 : 36;
+      typingTimer = setTimeout(step, d);
+    }
+    step();
+  }
+
+  letterText.addEventListener("click", function () {
+    if (!S.typing) return;
+    S.typing = false;
+    clearTimeout(typingTimer);
+    letterText.textContent = LETTER;
+    letterSign.classList.add("show");
+    psLine.classList.add("show");
+  });
+
+  /* ---------- 重来 ---------- */
+  $("replayBtn").addEventListener("click", function () {
+    resetAll();
+    go("cover");
+  });
+
+  function resetAll() {
+    S.lit = 0;
+    S.blowing = false;
+    S.revealed = false;
+    S.drawn = 0;
+    S.found = false;
+    S.typing = false;
+    S.letterStarted = false;
+    S.opened = false;
+    S.cakeBuilt = false;
+    S.scratchInited = false;
+    S.findInited = false;
+    S.cardFlipped = false;
+    S.busy = false;
+    strokes = 0;
+
+    $("envelope").classList.remove("opening");
+    candlesBox.innerHTML = "";
+    counter.textContent = "0 / 21";
+    confetti.innerHTML = "";
+    cakeSub.textContent = "21 根，一根都不能少";
+    cakeHint.textContent = "一共 21 根，一根都不能少";
+    cakeActions.innerHTML = '<button class="btn btn--day" id="lightBtn" type="button">点亮</button>' +
+      '<button class="btn btn--ghost" id="skipCake" type="button">跳过</button>';
+
+    $("scratchNext").disabled = true;
+    $("scratchHint").textContent = "刮开一半左右就能看全";
+    $("scratchWord").textContent = "今日宜：被惦记";
+    $("scratchSub").textContent = "忌 熬夜";
+    canvas.classList.remove("gone");
+    canvas.replaceWith(canvas.cloneNode(false)); // 清空旧遮罩
+    canvas = $("scratchCanvas");
+    S.scratchInited = false;
+
+    $("drawAgain").disabled = true;
+    $("drawNext").disabled = true;
+    card3d.classList.remove("flipped");
+    $("cardTip").textContent = "点我抽签";
+
+    $("findNext").disabled = true;
+    findStage.innerHTML = "";
+    $("findHint").textContent = "点错了也没关系，它们不会生气";
+
+    letterText.textContent = "";
+    letterSign.classList.remove("show");
+    psLine.classList.remove("show");
+  }
+
+  /* 调试用：?s=cake 直接打开某一屏 */
+  var preview = new URLSearchParams(location.search).get("s");
+  if (preview && $("scene-" + preview)) go(preview);
+})();
+</script>
+</body>
+</html>
