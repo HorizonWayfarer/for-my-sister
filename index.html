@@ -6,7 +6,7 @@
 <title>给姐姐 · 21 岁</title>
 <meta name="description" content="写给姐姐的一封生日信。" />
 <meta name="theme-color" content="#FBF6EE" />
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23FBF6EE'/%3E%3Ctext x='32' y='44' font-size='30' text-anchor='middle' fill='%23B76E79' font-family='Georgia,serif'%3E21%3C/text%3E%3C/svg%3E" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23FBF6EE'/%3E%3Ctext x='32' y='44' font-size='30' text-anchor='middle' fill='%23B76E79' font-family='KaiTi,serif'%3E21%3C/text%3E%3C/svg%3E" />
 <style>
 :root {
   --cream: oklch(0.982 0.014 82);
@@ -14,8 +14,8 @@
   --cream-warm: oklch(0.935 0.035 68);
   --paper: oklch(0.998 0.005 85);
   --ink: oklch(0.36 0.028 48);
-  --ink-soft: oklch(0.50 0.024 50);
-  --muted: oklch(0.62 0.022 54);
+  --ink-soft: oklch(0.46 0.028 48);
+  --muted: oklch(0.52 0.028 52);
   --rose: oklch(0.73 0.068 18);
   --rose-deep: oklch(0.63 0.078 20);
   --rose-pale: oklch(0.88 0.038 20);
@@ -23,9 +23,9 @@
   --glow: oklch(0.87 0.13 82);
   --line: oklch(0.73 0.055 22 / .5);
   --sketch: 255px 12px 225px 15px / 14px 225px 16px 255px;
-  --serif: "Songti SC", "Noto Serif SC", "Source Han Serif SC", "STSong", Georgia, serif;
-  --hand: "STXingkai", "Xingkai SC", "Kaiti SC", "STKaiti", "KaiTi", "楷体", "Noto Serif SC", var(--serif);
-  --sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
+  --serif: "STXingkai", "Xingkai SC", "Kaiti SC", "STKaiti", "KaiTi", "楷体", "Noto Serif SC", "Songti SC", Georgia, serif;
+  --hand: var(--serif);
+  --sans: var(--serif);
   --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
 }
 
@@ -161,9 +161,9 @@ body {
   appearance: none;
   cursor: pointer;
   font: inherit;
-  font-size: 14px;
-  letter-spacing: .16em;
-  text-indent: .16em;
+  font-size: 15px;
+  letter-spacing: .14em;
+  text-indent: .14em;
   min-height: 46px;
   padding: 11px 30px;
   border-radius: var(--sketch);
@@ -202,8 +202,8 @@ body {
 }
 
 .eyebrow {
-  font-size: 11.5px;
-  letter-spacing: .38em;
+  font-size: 12.5px;
+  letter-spacing: .34em;
   text-indent: .38em;
   color: var(--muted);
   margin: 0 0 16px;
@@ -220,8 +220,8 @@ body {
 }
 
 .hint {
-  font-size: 12.5px;
-  letter-spacing: .12em;
+  font-size: 13px;
+  letter-spacing: .1em;
   color: var(--muted);
   min-height: 1.4em;
   margin: 22px 0 0;
@@ -363,8 +363,8 @@ body {
   position: relative;
   z-index: 3;
   margin-top: 8px;
-  font-size: 11.5px;
-  letter-spacing: .16em;
+  font-size: 12.5px;
+  letter-spacing: .14em;
   color: var(--muted);
 }
 
@@ -922,6 +922,13 @@ body {
 @keyframes riseIn {
   from { opacity: 0; transform: translateY(16px); }
   to { opacity: 1; transform: none; }
+}
+
+/* 手写体小字加实，避免细笔画发虚 */
+.eyebrow, .hint, .btn, .envelope__note, .scene__sub, .counter,
+.eggStep, .eggLead, .ps, .cardFace--front .tip,
+.cardFace--back .yi, .cardFace--back .ji, .scratch__under .small {
+  -webkit-text-stroke: .28px currentColor;
 }
 
 @media (max-width: 420px) {
