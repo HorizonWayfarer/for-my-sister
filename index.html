@@ -426,15 +426,25 @@ body {
   50% { opacity: .9; transform: scale(1.25); }
 }
 
-.cake { position: relative; width: min(370px, 88vw); margin: 0 auto; filter: url(#sketch); }
+/* 分层蛋糕：蜡烛 + 各层高度按百分比分配，相加 100%（参考 CoderDojo 纯 CSS 分层思路） */
+.cake {
+  position: relative;
+  width: min(370px, 88vw);
+  height: clamp(200px, 50vw, 252px);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  filter: url(#sketch);
+}
 
 .candles {
   display: flex;
   align-items: flex-end;
   justify-content: center;
   gap: clamp(2px, .85vw, 5px);
+  flex: 0 0 24%;
   width: 62%;
-  height: clamp(52px, 13vw, 72px);
   margin: 0 auto;
   padding: 0 2px;
   position: relative;
@@ -498,6 +508,13 @@ body {
 }
 
 /* 三层手绘蛋糕 */
+.cake__stack {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
 .cake__tier {
   position: relative;
   margin: 0 auto;
@@ -505,8 +522,8 @@ body {
   box-shadow: inset 0 -8px 18px oklch(0.75 0.06 20 / .12), 0 8px 18px oklch(0.55 0.06 30 / .1);
 }
 .cake__tier--top {
-  width: 58%; height: 42px;
-  margin-bottom: -10px;
+  flex: 0 0 26%;
+  width: 58%;
   border-radius: var(--sketch);
   background: linear-gradient(180deg, var(--paper), var(--cream-deep));
   z-index: 4;
@@ -521,8 +538,8 @@ body {
   border: 1.5px solid var(--rose);
 }
 .cake__tier--mid {
-  width: 78%; height: 46px;
-  margin-bottom: -10px;
+  flex: 0 0 30%;
+  width: 78%;
   border-radius: var(--sketch);
   background: linear-gradient(180deg, oklch(0.98 0.02 84), var(--cream-deep));
   z-index: 3;
@@ -542,9 +559,9 @@ body {
 }
 
 .cake__body {
+  flex: 0 0 44%;
   position: relative;
   width: 100%;
-  height: clamp(94px, 23vw, 120px);
   border-radius: var(--sketch);
   border: 1.5px solid var(--rose);
   background:
@@ -598,7 +615,8 @@ body {
 }
 
 .cake__plate {
-  height: 16px;
+  flex: 0 0 6%;
+  min-height: 12px;
   margin: 2px -16px 0;
   border-radius: 50%;
   border: 1.5px solid var(--rose-pale);
@@ -994,9 +1012,11 @@ body {
 
       <div class="cake">
         <div class="candles" id="candles"></div>
-        <div class="cake__tier cake__tier--top"></div>
-        <div class="cake__tier cake__tier--mid"></div>
-        <div class="cake__body"><span class="cake__num">21</span><span class="cake__cherry"></span></div>
+        <div class="cake__stack">
+          <div class="cake__tier cake__tier--top"></div>
+          <div class="cake__tier cake__tier--mid"></div>
+          <div class="cake__body"><span class="cake__num">21</span><span class="cake__cherry"></span></div>
+        </div>
         <div class="cake__plate"></div>
       </div>
 
